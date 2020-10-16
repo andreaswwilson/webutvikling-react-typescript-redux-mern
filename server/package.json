@@ -6,7 +6,6 @@
   "scripts": {
     "start:build":"tsc -w",
     "start:run":"nodemon dist/server.js",
-    "watch": "tsc -w",
     "start": "concurrently npm:start:*"
   },
   "keywords": [],
