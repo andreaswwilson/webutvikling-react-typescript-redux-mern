@@ -2,8 +2,9 @@ import React, { useEffect } from 'react';
 import { Movie, fetchMovies } from '../actions';
 import { StoreState } from '../reducers';
 import { connect } from 'react-redux';
-import { Spinner } from 'reactstrap';
+import { Container, Spinner, Row, Col } from 'reactstrap';
 import { MovieCard } from './MovieCard';
+import './style.css';
 
 interface Props {
   movies: Movie[];
@@ -23,13 +24,16 @@ export const _App: React.FC<Props> = ({ movies, fetchMovies }): JSX.Element => {
   };
 
   return (
-    <div className='container'>
-      <div className='row'>
-        {movies.length === 0 && <Spinner color='primary' />}
-
-        {renderMovies()}
-      </div>
-    </div>
+    <Container>
+      {movies.length === 0 && (
+        <Row className='justify-content-md-center'>
+          <Col xs='1'>
+            <Spinner color='primary' /> Loading
+          </Col>
+        </Row>
+      )}
+      <Row>{renderMovies()}</Row>
+    </Container>
   );
 };
 

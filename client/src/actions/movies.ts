@@ -8,7 +8,10 @@ export interface Movie {
   _id: string;
   Year: string;
   Plot: string;
-  Ratings: { Source: string; Value: string }[];
+  imdbRating: string;
+  Runtime: string;
+  Genre: string;
+  Director: string;
 }
 
 export interface FetchMoviesAction {
