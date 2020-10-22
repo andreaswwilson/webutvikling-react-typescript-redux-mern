@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { ActionTypes } from './';
+import { MoviesActionTypes } from './';
 import { Dispatch } from 'redux';
 
 export interface Movie {
@@ -12,11 +12,12 @@ export interface Movie {
   Runtime: string;
   Genre: string;
   Director: string;
+  Favorite?: boolean;
 }
 
 export interface FetchMoviesAction {
-  type: ActionTypes.fetchMovies;
-  payload: any;
+  type: MoviesActionTypes.fetchMovies;
+  payload: Movie[];
 }
 
 export const fetchMovies = () => {
@@ -25,8 +26,32 @@ export const fetchMovies = () => {
     const response = await axios.get(url);
 
     dispatch<FetchMoviesAction>({
-      type: ActionTypes.fetchMovies,
+      type: MoviesActionTypes.fetchMovies,
       payload: response.data,
     });
+  };
+};
+
+export interface DeleteMovieAction {
+  type: MoviesActionTypes.deleteMovie;
+  payload: string;
+}
+
+export const deleteMovie = (id: string): DeleteMovieAction => {
+  return {
+    type: MoviesActionTypes.deleteMovie,
+    payload: id,
+  };
+};
+
+export interface ToggleFavoriteMovieAction {
+  type: MoviesActionTypes.toggleFavorite;
+  payload: string;
+}
+
+export const toggleFavoriteMovie = (id: string): ToggleFavoriteMovieAction => {
+  return {
+    type: MoviesActionTypes.toggleFavorite,
+    payload: id,
   };
 };
