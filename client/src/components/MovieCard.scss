@@ -5,13 +5,13 @@
   display: block;
   width: 800px;
   height: 350px;
-  margin: 100px auto;
+  margin: 50px auto;
   overflow: hidden;
   border-radius: 10px;
   transition: all 0.4s;
-  box-shadow: 0px 0px 150px -45px rgba(255, 51, 0, 0.5);
+  box-shadow: 0px 0px 120px -45px rgba(255, 51, 0, 0.5);
   &:hover {
-    box-shadow: 0px 0px 120px -55px rgba(255, 51, 0, 0.5);
+    box-shadow: 0px 0px 100px -55px rgba(255, 51, 0, 0.5);
   }
   &:hover {
     transform: scale(1.02);
@@ -84,7 +84,7 @@
             color: rgba(255, 255, 255, 0.8);
           }
           i {
-            font-size: 19px;
+            font-size: 30px;
             cursor: pointer;
           }
         }

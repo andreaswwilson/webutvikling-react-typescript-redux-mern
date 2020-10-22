@@ -1,7 +1,16 @@
-import { FetchMoviesAction } from './movies';
+import {
+  FetchMoviesAction,
+  DeleteMovieAction,
+  ToggleFavoriteMovieAction,
+} from './movies';
 
-export enum ActionTypes {
+export enum MoviesActionTypes {
   fetchMovies,
+  deleteMovie,
+  toggleFavorite,
 }
 
-export type Action = FetchMoviesAction;
+export type MoviesAction =
+  | FetchMoviesAction
+  | DeleteMovieAction
+  | ToggleFavoriteMovieAction;
