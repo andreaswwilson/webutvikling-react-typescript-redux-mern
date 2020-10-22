@@ -87,6 +87,14 @@
             font-size: 30px;
             cursor: pointer;
           }
+          .fas {
+            transition: color 0.5s;
+            color: rgba(255, 0, 0, 0.5);
+          }
+          .fas:hover {
+            transition: color 0.5s;
+            color: rgba(255, 0, 0, 1);
+          }
         }
       }
     }
