@@ -14,7 +14,8 @@ export const moviesReducer = (state: Movie[] = [], action: MoviesAction) => {
           // Ikke denne vi ser etter
           return movie;
         }
-        // Sett favoritt til å være sann
+        // Sett favoritt til å være motsatt. Derson den ikke allerede er satt
+        // er den undefined, og blir da satt til sann.
         movie.Favorite = !movie.Favorite;
         return {
           ...movie,
