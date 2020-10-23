@@ -51,7 +51,6 @@ export class Movie {
 
   constructor() {
     const schema = new mongoose.Schema<IMovie>({
-      _id: String,
       Title: String,
       Year: String,
       Rated: String,

@@ -1,16 +1,15 @@
-import { Router, Response, Request } from 'express';
-// import Movie from '../../models/Movie';
+import { Response, Request } from 'express';
 import { DB } from '../../database';
-const router = Router();
-
+import { Router } from '../Router';
 /**
  * @route   GET api/movies
  * @desc    Get all movies
- * @access  Public TODO - include auth
+ * @access  Public
  */
-router.get('/', async (req: Request, res: Response) => {
+Router.instance.get('/', async (req: Request, res: Response) => {
   try {
-    const movies = await DB.Models.Movie.find();
+    req === req; // remove annoying "req not used warning"
+    const movies = await DB.Models.Movie.find({});
     if (!movies) throw Error('No items');
 
     res.status(200).json(movies);
@@ -18,6 +17,38 @@ router.get('/', async (req: Request, res: Response) => {
     res.status(400).json({ msg: e.message });
   }
 });
+
+/**
+ * @route Get api/movies/:id
+ * @desc Get movie by id
+ * @access Public
+ */
+Router.instance.get('/:id', async (req: Request, res: Response) => {
+  try {
+    const movie = await DB.Models.Movie.findById(req.params.id);
+    if (!movie) throw Error('No record found');
+    res.status(200).json(movie);
+  } catch (error) {
+    res.status(400).json({ id: req.params.id, msg: error.message });
+  }
+});
+
+/**
+ * @route Get api/movies/year/:year
+ * @desc get movie by year
+ * @access Public
+ */
+Router.instance.get('/year/:year', async (req: Request, res: Response) => {
+  try {
+    const movie = await DB.Models.Movie.find({ Year: req.params.year });
+    if (!movie) throw Error('No record found');
+    res.status(200).json(movie);
+  } catch (error) {
+    res.status(400).json({ year: req.params.year, msg: error.message });
+  }
+});
+
+export default Router.instance;
 
 // /**
 //  * @route   POST api/movies
@@ -53,49 +84,17 @@ router.get('/', async (req: Request, res: Response) => {
 // //  * @access  Public
 // //  */
 
-// // router.delete('/:id', async (req: Request, res: Response) => {
-// //   try {
-// //     const movie = await Movie.findById(req.params.id);
-// //     if (!movie) throw Error('No item found');
+// router.delete('/:id', async (req: Request, res: Response) => {
+//   try {
+//     const movie = await Movie.findById(req.params.id);
+//     if (!movie) throw Error('No item found');
 
-// //     const removed = await movie.remove();
-// //     if (!removed)
-// //       throw Error('Something went wrong while trying to delete the item');
+//     const removed = await movie.remove();
+//     if (!removed)
+//       throw Error('Something went wrong while trying to delete the item');
 
-// //     res.status(200).json({ success: true });
-// //   } catch (e) {
-// //     res.status(400).json({ msg: e.message, success: false });
-// //   }
-// // });
-
-// /**
-//  * @route PUT api/movie/:id
-//  * @desc Update a movie
-//  * @access Public
-//  */
-// router.get('/:id', async (req: Request, res: Response) => {
-//   Movie.findById(req.params.id, (error: any, result: ana) => {
-//     if (error) {
-//       res.send(error);
-//     } else {
-//       res.send(result);
-//     }
-//   });
+//     res.status(200).json({ success: true });
+//   } catch (e) {
+//     res.status(400).json({ msg: e.message, success: false });
+//   }
 // });
-
-// /**
-//  * @route PUT api/movie/:id
-//  * @desc Update a movie
-//  * @access Public
-//  */
-// router.put('/:id', async (req: Request, res: Response) => {
-//   Movie.findByIdAndUpdate(req.params.id, req.body, (error, result) => {
-//     if (error) {
-//       res.send(error);
-//     } else {
-//       res.send(result);
-//     }
-//   });
-// });
-
-export default router;
