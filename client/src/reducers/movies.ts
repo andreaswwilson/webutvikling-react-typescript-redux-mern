@@ -21,6 +21,9 @@ export const moviesReducer = (state: Movie[] = [], action: MoviesAction) => {
           ...movie,
         };
       });
+    case MoviesActionTypes.getMovieByID:
+      console.log(action.payload);
+      return state.filter((movie: Movie) => movie._id === action.payload);
 
     default:
       return state;

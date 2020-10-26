@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { MoviesActionTypes } from './';
 import { Dispatch } from 'redux';
+import { Identifier } from 'typescript';
 
 export interface Movie {
   Title: string;
@@ -52,6 +53,17 @@ export interface ToggleFavoriteMovieAction {
 export const toggleFavoriteMovie = (id: string): ToggleFavoriteMovieAction => {
   return {
     type: MoviesActionTypes.toggleFavorite,
+    payload: id,
+  };
+};
+
+export interface GetMovieByID {
+  type: MoviesActionTypes.getMovieByID;
+  payload: string;
+}
+export const getMovieByID = (id: string): GetMovieByID => {
+  return {
+    type: MoviesActionTypes.getMovieByID,
     payload: id,
   };
 };

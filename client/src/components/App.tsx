@@ -35,14 +35,14 @@ export const _App: React.FC<Props> = ({
 
   return (
     <Container>
-      {movies.length === 0 && (
-        <Row className='justify-content-md-center'>
+      <Row className='justify-content-md-center'>
+        {movies.length === 0 && (
           <Col xs='1'>
             <Spinner color='primary' /> Loading
           </Col>
-        </Row>
-      )}
-      <Row>{renderMovies()}</Row>
+        )}
+        {renderMovies()}
+      </Row>
     </Container>
   );
 };
