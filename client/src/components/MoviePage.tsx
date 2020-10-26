@@ -1,18 +1,28 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import { Button, Container, Form, FormGroup, Input, Label } from 'reactstrap';
-import { Movie, fetchMovies } from '../actions';
+import {
+  Button,
+  Container,
+  Form,
+  FormGroup,
+  Input,
+  Label,
+  Spinner,
+} from 'reactstrap';
+import { Movie, fetchMovies, updateMovie } from '../actions';
 import { StoreState } from '../reducers';
 
 interface Props {
   movies: Movie[];
   fetchMovies: Function;
+  updateMovie: Function;
 }
 
 export const _MoviePage: React.FC<Props> = ({
   movies,
   fetchMovies,
+  updateMovie,
 }): JSX.Element => {
   const params = useParams() as { id: string };
   // USing state locally just for forminput handeling
@@ -21,6 +31,14 @@ export const _MoviePage: React.FC<Props> = ({
     fetchMovies();
   }, [params.id]);
   const movie: Movie = movies.filter((m) => m._id === params.id)[0];
+
+  const renderReviews = () => {
+    const reviews = movie.Reviews || [];
+    return reviews.map((review: string) => {
+      return <div> {review}</div>;
+    });
+  };
+
   if (movie) {
     return (
       <Container>
@@ -33,6 +51,16 @@ export const _MoviePage: React.FC<Props> = ({
         <Form
           onSubmit={(event: React.FormEvent<HTMLFormElement>) => {
             event.preventDefault();
+            if (movie.Reviews) {
+              movie.Reviews.push(formInput);
+            } else {
+              movie.Reviews = [formInput];
+            }
+            console.log(movie);
+            if (formInput.length > 5) {
+              updateMovie(movie);
+            }
+
             setFormInput('');
           }}
         >
@@ -51,10 +79,14 @@ export const _MoviePage: React.FC<Props> = ({
 
           <Button>Submit</Button>
         </Form>
+        {movie.Reviews !== undefined && movie.Reviews.length > 0 && (
+          <h2>Reviews</h2>
+        )}
+        {renderReviews()}
       </Container>
     );
   }
-  return <div>Movie not found</div>;
+  return <div></div>;
 };
 
 const mapStateToProps = ({ movies }: StoreState): { movies: Movie[] } => {
@@ -63,4 +95,5 @@ const mapStateToProps = ({ movies }: StoreState): { movies: Movie[] } => {
 
 export const MoviePage = connect(mapStateToProps, {
   fetchMovies,
+  updateMovie,
 })(_MoviePage);
