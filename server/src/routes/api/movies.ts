@@ -23,7 +23,7 @@ Router.instance.get('/', async (req: Request, res: Response) => {
  * @desc Get movie by id
  * @access Public
  */
-Router.instance.get('/:id', async (req: Request, res: Response) => {
+Router.instance.get('/id/:id', async (req: Request, res: Response) => {
   try {
     const movie = await DB.Models.Movie.findById(req.params.id);
     if (!movie) throw Error('No record found');
