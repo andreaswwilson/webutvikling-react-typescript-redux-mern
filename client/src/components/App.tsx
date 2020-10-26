@@ -1,5 +1,10 @@
 import React, { useEffect } from 'react';
-import { Movie, fetchMovies, toggleFavoriteMovie } from '../actions';
+import {
+  Movie,
+  fetchMovies,
+  toggleFavoriteMovie,
+  updateMovie,
+} from '../actions';
 import { StoreState } from '../reducers';
 import { connect } from 'react-redux';
 import { Container, Spinner, Row, Col } from 'reactstrap';
@@ -9,6 +14,7 @@ import './style.css';
 interface Props {
   movies: Movie[];
   fetchMovies: Function;
+  updateMovie: any; // todo
   toggleFavoriteMovie: typeof toggleFavoriteMovie;
 }
 
@@ -16,6 +22,7 @@ export const _App: React.FC<Props> = ({
   movies,
   fetchMovies,
   toggleFavoriteMovie,
+  updateMovie,
 }): JSX.Element => {
   useEffect(() => {
     fetchMovies();
@@ -27,6 +34,7 @@ export const _App: React.FC<Props> = ({
         <MovieCard
           movie={movie}
           toggleFavoriteMovie={toggleFavoriteMovie}
+          updateMovie={updateMovie}
           key={movie._id}
         />
       );
@@ -53,5 +61,6 @@ const mapStateToProps = ({ movies }: StoreState): { movies: Movie[] } => {
 
 export const App = connect(mapStateToProps, {
   fetchMovies,
+  updateMovie,
   toggleFavoriteMovie,
 })(_App);

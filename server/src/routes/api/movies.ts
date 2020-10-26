@@ -65,8 +65,40 @@ Router.instance.get('/title/:title', async (req: Request, res: Response) => {
   }
 });
 
+/**
+ * @route Put api/movies/id/:id
+ * @desc Update movie
+ * @access Public
+ */
+Router.instance.put('/id/:id', async (req: Request, res: Response) => {
+  try {
+    // Create new Movie object
+    const updatedMovie = new DB.Models.Movie(req.body);
+    const movie = await DB.Models.Movie.replaceOne(
+      { _id: req.params.id },
+      updatedMovie,
+    );
+
+    if (movie) {
+      res.status(200).json({ success: true });
+    }
+  } catch (e) {
+    res.status(400).json({ msg: e.message, success: false });
+  }
+});
+
 export default Router.instance;
 
+//     if (!movie) throw Error('No item found');
+
+//     const removed = await movie.remove();
+//     if (!removed)
+//       throw Error('Something went wrong while trying to delete the item');
+
+//     res.status(200).json({ success: true });
+//   } catch (e) {
+//     res.status(400).json({ msg: e.message, success: false });
+//   }
 // /**
 //  * @route   POST api/movies
 //  * @desc    Create a movie

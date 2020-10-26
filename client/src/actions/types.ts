@@ -2,18 +2,18 @@ import {
   FetchMoviesAction,
   DeleteMovieAction,
   ToggleFavoriteMovieAction,
-  GetMovieByID,
+  UpdateMovieAction,
 } from './movies';
 
 export enum MoviesActionTypes {
   fetchMovies,
   deleteMovie,
   toggleFavorite,
-  getMovieByID,
+  updateMovie,
 }
 
 export type MoviesAction =
   | FetchMoviesAction
   | DeleteMovieAction
   | ToggleFavoriteMovieAction
-  | GetMovieByID;
+  | UpdateMovieAction;

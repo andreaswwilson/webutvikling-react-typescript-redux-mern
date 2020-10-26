@@ -1,15 +1,17 @@
 import React, { CSSProperties } from 'react';
 import './MovieCard.scss';
-import { Movie, toggleFavoriteMovie } from '../actions';
+import { Movie, toggleFavoriteMovie, updateMovie } from '../actions';
 
 interface Props {
   movie: Movie;
   toggleFavoriteMovie: typeof toggleFavoriteMovie;
+  updateMovie: typeof updateMovie;
 }
 
 export const MovieCard: React.FC<Props> = ({
   movie,
-  toggleFavoriteMovie: toggleFavoriteMovie,
+  toggleFavoriteMovie,
+  updateMovie,
 }): JSX.Element => {
   const backgroundCSS: CSSProperties = {
     backgroundImage: 'url(' + movie.Poster + ')',
@@ -41,6 +43,7 @@ export const MovieCard: React.FC<Props> = ({
                 onClick={(event: React.MouseEvent<HTMLElement>) => {
                   event.preventDefault(); // disable href on favorite
                   toggleFavoriteMovie(movie._id);
+                  updateMovie(movie);
                 }}
               >
                 {movie.Favorite ? (
@@ -58,9 +61,3 @@ export const MovieCard: React.FC<Props> = ({
     </a>
   );
 };
-
-// const mapStateToProps = ({ movies }: StoreState): { movies: Movie[] } => {
-//   return { movies };
-// };
-
-// export const MovieCard = connect(mapStateToProps, { deleteMovie })(_MovieCard);

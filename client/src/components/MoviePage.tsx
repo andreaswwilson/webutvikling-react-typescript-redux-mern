@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import { Movie, fetchMovies, getMovieByID } from '../actions';
+import { Movie, fetchMovies } from '../actions';
 import { StoreState } from '../reducers';
 
 interface Props {

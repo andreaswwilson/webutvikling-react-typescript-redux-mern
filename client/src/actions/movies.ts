@@ -1,19 +1,34 @@
 import axios from 'axios';
 import { MoviesActionTypes } from './';
 import { Dispatch } from 'redux';
-import { Identifier } from 'typescript';
 
 export interface Movie {
-  Title: string;
-  Poster: string;
   _id: string;
+  Title: string;
   Year: string;
-  Plot: string;
-  imdbRating: string;
-  Runtime: string;
+  Rated: string;
+  Released: string;
   Genre: string;
   Director: string;
+  Writer: string;
+  Actors: string;
+  Plot: string;
+  Language: string;
+  Country: string;
+  Awards: string;
+  Poster: string;
+  Ratings: object[];
+  Metascore: string;
+  imdbRating: string;
+  imdbVotes: string;
+  imdbID: string;
+  Type: string;
+  DVD: string;
+  BoxOffice: string;
+  Production: string;
+  Website: string;
   Favorite?: boolean;
+  Runtime: string;
 }
 
 export interface FetchMoviesAction {
@@ -57,13 +72,20 @@ export const toggleFavoriteMovie = (id: string): ToggleFavoriteMovieAction => {
   };
 };
 
-export interface GetMovieByID {
-  type: MoviesActionTypes.getMovieByID;
-  payload: string;
+export interface UpdateMovieAction {
+  type: MoviesActionTypes.updateMovie;
+  payload: JSON;
 }
-export const getMovieByID = (id: string): GetMovieByID => {
-  return {
-    type: MoviesActionTypes.getMovieByID,
-    payload: id,
+
+export const updateMovie = (movie: Movie) => {
+  const url = 'http://localhost:5000/api/movies/id/' + movie._id;
+  console.log('URL:' + url);
+  return async (dispatch: Dispatch) => {
+    const response = await axios.put(url, movie);
+
+    dispatch<UpdateMovieAction>({
+      type: MoviesActionTypes.updateMovie,
+      payload: response.data,
+    });
   };
 };
