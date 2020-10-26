@@ -28,8 +28,9 @@ Windows: (In server folder)
 2. Enter "npm start"
 
 If you get an error (on Windows) saying: 
+
 *"src/server.ts(6,18): error TS7016: Could not find a declaration file for module 'cors'.":*
-Just CTRL-C to cancel the command and type: **npm install @types/cors.** 
-After this it should work
+
+Just CTRL-C to cancel the command and type: **npm install @types/cors.**  After this it should work
 
 
