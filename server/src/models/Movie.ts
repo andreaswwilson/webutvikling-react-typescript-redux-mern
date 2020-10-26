@@ -59,6 +59,7 @@ export class Movie {
       Website: String,
       Favorite: Boolean,
       Runtime: String,
+      Reviews: Array,
     });
 
     this._model = mongoose.model<IMovie>('movies', schema);

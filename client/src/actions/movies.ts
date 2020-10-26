@@ -29,6 +29,7 @@ export interface Movie {
   Website: string;
   Favorite?: boolean;
   Runtime: string;
+  Reviews?: string[];
 }
 
 export interface FetchMoviesAction {
