@@ -24,7 +24,7 @@ Router.instance.get('/page/:page', async (req: Request, res: Response) => {
     const perPage = 3;
     const skipped = (page - 1) * perPage;
     if (!movies) throw Error('No record found');
-    const paginatedMovies = movies.slice(skipped, skipped + perPage)
+    const paginatedMovies = movies.slice(skipped, skipped + perPage);
     res.status(200).json(paginatedMovies);
   } catch (error) {
     res.status(400).json({ id: req.params.id, msg: error.message });
@@ -96,6 +96,23 @@ Router.instance.put('/:id', async (req: Request, res: Response) => {
     }
   } catch (e) {
     res.status(400).json({ msg: e.message, success: false });
+  }
+});
+
+/**
+ * @route Get api/movies/title/:title
+ * @desc get movie by a partial title. case-insensitive
+ * @access Public
+ */
+Router.instance.get('/title/:title', async (req: Request, res: Response) => {
+  try {
+    const movie = await DB.Models.Movie.find({
+      Title: { $regex: req.params.title, $options: 'i' }, // option i = case insensitive
+    });
+    if (!movie) throw Error('No record found');
+    res.status(200).json(movie);
+  } catch (error) {
+    res.status(400).json({ year: req.params.title, msg: error.message });
   }
 });
 
