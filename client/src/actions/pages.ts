@@ -1,35 +1,35 @@
-import { PageActionTypes } from './';
+import { SET_PAGE, NEXT_PAGE, PREV_PAGE } from './';
 
 export interface Page {
   page: number;
 }
 
 export interface SetPageAction {
-  type: PageActionTypes.setPage;
+  type: typeof SET_PAGE;
   payload: number;
 }
 
 export const setPage = (page: number): SetPageAction => {
   return {
-    type: PageActionTypes.setPage,
+    type: SET_PAGE,
     payload: page,
   };
 };
 
 export interface NextPageAction {
-  type: PageActionTypes.nextPage;
+  type: typeof NEXT_PAGE;
 }
 export const nextPage = (): NextPageAction => {
   return {
-    type: PageActionTypes.nextPage,
+    type: NEXT_PAGE,
   };
 };
 
 export interface PrevPageAction {
-  type: PageActionTypes.prevPage;
+  type: typeof PREV_PAGE;
 }
 export const prevPage = (): PrevPageAction => {
   return {
-    type: PageActionTypes.prevPage,
+    type: PREV_PAGE,
   };
 };

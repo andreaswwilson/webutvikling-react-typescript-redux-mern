@@ -38,7 +38,7 @@ export interface FetchMoviesAction {
 }
 
 export const fetchMovies = () => {
-  const url = 'http://localhost:5000/api/movies/page/' + '1';
+  const url = 'http://localhost:5000/api/movies';
   return async (dispatch: Dispatch) => {
     const response = await axios.get(url);
 

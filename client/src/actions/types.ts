@@ -5,11 +5,7 @@ import {
   UpdateMovieAction,
 } from './movies';
 
-import {
-  SetPageAction,
-  NextPageAction,
-  PrevPageAction,
-} from './pages';
+import { SetPageAction, NextPageAction, PrevPageAction } from './pages';
 
 export enum MoviesActionTypes {
   fetchMovies,
@@ -24,14 +20,8 @@ export type MoviesAction =
   | ToggleFavoriteMovieAction
   | UpdateMovieAction;
 
+export const SET_PAGE = 'SET_PAGE';
+export const NEXT_PAGE = 'NEXT_PAGE';
+export const PREV_PAGE = 'PREV_PAGE';
 
-export enum PageActionTypes {
-  setPage,
-  nextPage,
-  prevPage,
-}
-
-export type PageAction = 
-  | SetPageAction
-  | NextPageAction
-  | PrevPageAction
+export type PageAction = SetPageAction | NextPageAction | PrevPageAction;

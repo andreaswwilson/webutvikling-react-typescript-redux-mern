@@ -26,16 +26,16 @@ interface Props {
 
 export const _App: React.FC<Props> = ({
   movies,
-  page,
   fetchMovies,
-  toggleFavoriteMovie,
   updateMovie,
+  toggleFavoriteMovie,
+  page,
   prevPage,
   nextPage,
 }): JSX.Element => {
-  // useEffect(() => {
-  //   fetchMovies();
-  // }, []);
+  useEffect(() => {
+    fetchMovies();
+  }, []);
 
   const renderMovies = () => {
     return movies.map((movie: Movie) => {
@@ -58,7 +58,7 @@ export const _App: React.FC<Props> = ({
             <Spinner color='primary' /> Loading
           </Col>
         )}
-        {/* {renderMovies()} */}
+        {renderMovies()}
       </Row>
       <button onClick={() => prevPage()}> prev </button>
       <p>Page: {page.page} </p>
