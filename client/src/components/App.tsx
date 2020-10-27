@@ -12,6 +12,7 @@ import { StoreState } from '../reducers';
 import { connect } from 'react-redux';
 import { Container, Spinner, Row, Col } from 'reactstrap';
 import { MovieCard } from './MovieCard';
+import Search from "./Search";
 import './style.css';
 
 interface Props {
@@ -52,8 +53,12 @@ export const _App: React.FC<Props> = ({
 
   return (
     <Container>
+
+      <Search />
+
       <Row className='justify-content-md-center'>
         {movies.length === 0 && (
+
           <Col xs='1'>
             <Spinner color='primary' /> Loading
           </Col>

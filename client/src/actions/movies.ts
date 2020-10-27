@@ -1,6 +1,9 @@
 import axios from 'axios';
-import { MoviesActionTypes } from './';
+import { MoviesActionTypes } from '.';
 import { Dispatch } from 'redux';
+//import { SEARCH_MOVIE } from './types';
+import { useDispatch } from 'react-redux';
+import { resolve } from 'path';
 
 export interface Movie {
   _id: string;
@@ -72,6 +75,26 @@ export const toggleFavoriteMovie = (id: string): ToggleFavoriteMovieAction => {
     payload: id,
   };
 };
+
+export interface SearchMoviesAction {
+  type: MoviesActionTypes.searchMovies;
+  payload: Movie[];
+}
+
+//dispatching the action type and payload which will make the reducer recognize the actions
+export const SearchMovie = (title: string) => {
+  
+  const url = 'http://localhost:5000/api/movies/title/' + title;
+
+  return async(dispatch: Dispatch) => {
+    const response = await axios.get(url);
+
+    dispatch <SearchMoviesAction> ({
+      type: MoviesActionTypes.searchMovies,
+      payload: response.data
+    })
+  }
+}
 
 export interface UpdateMovieAction {
   type: MoviesActionTypes.updateMovie;
