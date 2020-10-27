@@ -23,6 +23,7 @@ export const moviesReducer = (state: Movie[] = [], action: MoviesAction) => {
       });
     case MoviesActionTypes.updateMovie:
       return state;
+
     default:
       return state;
   }

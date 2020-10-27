@@ -8,10 +8,10 @@ import {
 import { SetPageAction, NextPageAction, PrevPageAction } from './pages';
 
 export enum MoviesActionTypes {
-  fetchMovies,
-  deleteMovie,
-  toggleFavorite,
-  updateMovie,
+  fetchMovies = 'FETCH_MOVIES',
+  deleteMovie = 'DELETE_MOVIE',
+  toggleFavorite = 'TOGGLE_FAVORITE',
+  updateMovie = 'UPDATE MOVIE',
 }
 
 export type MoviesAction =
