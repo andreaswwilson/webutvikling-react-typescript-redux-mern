@@ -26,6 +26,9 @@ export const moviesReducer = (state: Movie[] = [], action: MoviesAction) => {
     case MoviesActionTypes.searchMovies: 
       return action.payload
 
+    case MoviesActionTypes.updateMovie:
+      return state;
+      
     default:
       return state;
   }

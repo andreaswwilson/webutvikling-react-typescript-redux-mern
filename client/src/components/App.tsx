@@ -1,5 +1,13 @@
 import React, { useEffect } from 'react';
-import { Movie, fetchMovies, toggleFavoriteMovie } from '../actions';
+import {
+  Movie,
+  fetchMovies,
+  toggleFavoriteMovie,
+  updateMovie,
+  Page,
+  prevPage,
+  nextPage,
+} from '../actions';
 import { StoreState } from '../reducers';
 import { connect } from 'react-redux';
 import { Container, Spinner, Row, Col } from 'reactstrap';
@@ -10,13 +18,21 @@ import './style.css';
 interface Props {
   movies: Movie[];
   fetchMovies: Function;
+  updateMovie: any;
   toggleFavoriteMovie: typeof toggleFavoriteMovie;
+  page: Page;
+  nextPage: typeof nextPage;
+  prevPage: typeof prevPage;
 }
 
 export const _App: React.FC<Props> = ({
   movies,
   fetchMovies,
+  updateMovie,
   toggleFavoriteMovie,
+  page,
+  prevPage,
+  nextPage,
 }): JSX.Element => {
   useEffect(() => {
     fetchMovies();
@@ -28,6 +44,7 @@ export const _App: React.FC<Props> = ({
         <MovieCard
           movie={movie}
           toggleFavoriteMovie={toggleFavoriteMovie}
+          updateMovie={updateMovie}
           key={movie._id}
         />
       );
@@ -36,24 +53,33 @@ export const _App: React.FC<Props> = ({
 
   return (
     <Container>
+
       <Search />
-      {movies.length === 0 && (
-        <Row className='justify-content-md-center'>
+
+      <Row className='justify-content-md-center'>
+        {movies.length === 0 && (
+
           <Col xs='1'>
             <Spinner color='primary' /> Loading
           </Col>
-        </Row>
-      )}
-      <Row>{renderMovies()}</Row>
+        )}
+        {renderMovies()}
+      </Row>
+      <button onClick={() => prevPage()}> prev </button>
+      <p>Page: {page.page} </p>
+      <button onClick={() => nextPage()}> next </button>
     </Container>
   );
 };
 
-const mapStateToProps = ({ movies }: StoreState): { movies: Movie[] } => {
-  return { movies };
+const mapStateToProps = ({ movies, page }: StoreState) => {
+  return { movies, page };
 };
 
 export const App = connect(mapStateToProps, {
   fetchMovies,
+  updateMovie,
+  nextPage,
+  prevPage,
   toggleFavoriteMovie,
 })(_App);

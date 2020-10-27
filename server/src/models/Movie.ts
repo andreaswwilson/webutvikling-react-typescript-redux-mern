@@ -1,20 +1,3 @@
-// import { model, Schema } from "mongoose";
-
-// //Schema representing a single movie
-// const MovieSchema = new Schema({
-//   title: String,
-//   plot: String,
-//   year: String,
-//   genre: String,
-//   director: String,
-//   actors: String,
-//   imdbRating: String,
-//   poster: String,
-// });
-
-// const Movie = model("movie", MovieSchema);
-
-// export default Movie;
 // https://know-thy-code.com/mongoose-schemas-models-typescript/
 
 import mongoose from 'mongoose';
@@ -74,6 +57,9 @@ export class Movie {
       BoxOffice: String,
       Production: String,
       Website: String,
+      Favorite: Boolean,
+      Runtime: String,
+      Reviews: Array,
     });
 
     this._model = mongoose.model<IMovie>('movies', schema);

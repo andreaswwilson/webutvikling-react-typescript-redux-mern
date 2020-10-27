@@ -6,16 +6,33 @@ import { useDispatch } from 'react-redux';
 import { resolve } from 'path';
 
 export interface Movie {
-  Title: string;
-  Poster: string;
   _id: string;
+  Title: string;
   Year: string;
-  Plot: string;
-  imdbRating: string;
-  Runtime: string;
+  Rated: string;
+  Released: string;
   Genre: string;
   Director: string;
+  Writer: string;
+  Actors: string;
+  Plot: string;
+  Language: string;
+  Country: string;
+  Awards: string;
+  Poster: string;
+  Ratings: object[];
+  Metascore: string;
+  imdbRating: string;
+  imdbVotes: string;
+  imdbID: string;
+  Type: string;
+  DVD: string;
+  BoxOffice: string;
+  Production: string;
+  Website: string;
   Favorite?: boolean;
+  Runtime: string;
+  Reviews?: string[];
 }
 
 export interface FetchMoviesAction {
@@ -68,10 +85,8 @@ export interface SearchMoviesAction {
 export const SearchMovie = (title: string) => {
   
   const url = 'http://localhost:5000/api/movies/title/' + title;
-  console.log(url)
 
   return async(dispatch: Dispatch) => {
-
     const response = await axios.get(url);
 
     dispatch <SearchMoviesAction> ({
@@ -81,3 +96,20 @@ export const SearchMovie = (title: string) => {
   }
 }
 
+export interface UpdateMovieAction {
+  type: MoviesActionTypes.updateMovie;
+  payload: any;
+}
+
+export const updateMovie = (movie: Movie) => {
+  const url = 'http://localhost:5000/api/movies/' + movie._id;
+  console.log('URL:' + url);
+  return async (dispatch: Dispatch) => {
+    const response = await axios.put(url, movie);
+
+    dispatch<UpdateMovieAction>({
+      type: MoviesActionTypes.updateMovie,
+      payload: response.data,
+    });
+  };
+};

@@ -5,12 +5,24 @@ import { applyMiddleware, createStore } from 'redux';
 import thunk from 'redux-thunk';
 import { reducers } from './reducers';
 import { Provider } from 'react-redux';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import { MoviePage } from './components/MoviePage';
 
 const store = createStore(reducers, applyMiddleware(thunk));
 
 ReactDOM.render(
   <Provider store={store}>
-    <App />
+    <Router>
+      <Switch>
+        <Route path='/movie/:id'>
+          <MoviePage />
+        </Route>
+        {/* This must be last */}
+        <Route exact path='/'>
+          <App />
+        </Route>
+      </Switch>
+    </Router>
   </Provider>,
   document.querySelector('#root'),
 );
