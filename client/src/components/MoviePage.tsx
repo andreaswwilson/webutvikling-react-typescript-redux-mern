@@ -35,17 +35,24 @@ export const _MoviePage: React.FC<Props> = ({
   const renderReviews = () => {
     const reviews = movie.Reviews || [];
     return reviews.map((review: string) => {
-      return <div> {review}</div>;
+      return <div className="Review"> {review}</div>;
     });
   };
 
   if (movie) {
     return (
+      <div className="MoviePage">
       <Container>
+        <img src={movie.Poster} className="moviePoster"/>
+ 
         <h1>{movie.Title}</h1>
-        <h2>Actors</h2>
-        <p>{movie.Actors}</p>
-        <h2>Plot</h2>
+        <br/>
+        <p><b>Release date:</b> {movie.Released}</p>
+        <p><b>Director: </b>{movie.Director}</p>
+        <p><b>Writer: </b>{movie.Writer}</p>
+        <p><b>Runtime: </b>{movie.Runtime}</p>
+        <p><b>Actors: </b>{movie.Actors}</p>
+        <h3>Plot</h3>
         <p>{movie.Plot}</p>
         <h2>Add review</h2>
         <Form
@@ -65,7 +72,7 @@ export const _MoviePage: React.FC<Props> = ({
           }}
         >
           <FormGroup>
-            <Label for='review'>Review:</Label>
+            <Label for='review'></Label>
             <Input
               type='textarea'
               name='review'
@@ -78,12 +85,15 @@ export const _MoviePage: React.FC<Props> = ({
           </FormGroup>
 
           <Button>Submit</Button>
+        
         </Form>
+        <br/>
         {movie.Reviews !== undefined && movie.Reviews.length > 0 && (
-          <h2>Reviews</h2>
+          <h2>All Reviews</h2>
         )}
         {renderReviews()}
       </Container>
+      </div>
     );
   }
   return <div></div>;

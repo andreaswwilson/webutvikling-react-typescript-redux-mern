@@ -18,7 +18,7 @@ ReactDOM.render(
           <MoviePage />
         </Route>
         {/* This must be last */}
-        <Route path='/'>
+        <Route exact path='/'>
           <App />
         </Route>
       </Switch>

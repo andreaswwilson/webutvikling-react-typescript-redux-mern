@@ -5,6 +5,12 @@ import {
   UpdateMovieAction,
 } from './movies';
 
+import {
+  SetPageAction,
+  NextPageAction,
+  PrevPageAction,
+} from './pages';
+
 export enum MoviesActionTypes {
   fetchMovies,
   deleteMovie,
@@ -17,3 +23,15 @@ export type MoviesAction =
   | DeleteMovieAction
   | ToggleFavoriteMovieAction
   | UpdateMovieAction;
+
+
+export enum PageActionTypes {
+  setPage,
+  nextPage,
+  prevPage,
+}
+
+export type PageAction = 
+  | SetPageAction
+  | NextPageAction
+  | PrevPageAction

@@ -4,6 +4,7 @@ import {
   fetchMovies,
   toggleFavoriteMovie,
   updateMovie,
+  Page,
 } from '../actions';
 import { StoreState } from '../reducers';
 import { connect } from 'react-redux';
@@ -29,6 +30,7 @@ export const _App: React.FC<Props> = ({
   }, []);
 
   const renderMovies = () => {
+
     return movies.map((movie: Movie) => {
       return (
         <MovieCard
@@ -51,6 +53,9 @@ export const _App: React.FC<Props> = ({
         )}
         {renderMovies()}
       </Row>
+      <button > prev </button>
+      <p>Page: </p>
+      <button > next </button>
     </Container>
   );
 };

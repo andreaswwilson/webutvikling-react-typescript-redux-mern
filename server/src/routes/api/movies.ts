@@ -9,6 +9,8 @@ import { Router } from '../Router';
 Router.instance.get('/', async (req: Request, res: Response) => {
   try {
     req === req; // remove annoying "req not used warning"
+    
+
     const movies = await DB.Models.Movie.find({});
     if (!movies) throw Error('No items');
 
@@ -28,6 +30,20 @@ Router.instance.get('/id/:id', async (req: Request, res: Response) => {
     const movie = await DB.Models.Movie.findById(req.params.id);
     if (!movie) throw Error('No record found');
     res.status(200).json(movie);
+  } catch (error) {
+    res.status(400).json({ id: req.params.id, msg: error.message });
+  }
+});
+
+Router.instance.get('/page/:page', async (req: Request, res: Response) => {
+  try {
+    const movies = await DB.Models.Movie.find();
+    const page = parseInt(req.params.page);
+    const perPage = 3;
+    const skipped = (page - 1) * perPage;
+    if (!movies) throw Error('No record found');
+    const paginatedMovies = movies.slice(skipped, skipped + perPage)
+    res.status(200).json(paginatedMovies);
   } catch (error) {
     res.status(400).json({ id: req.params.id, msg: error.message });
   }
