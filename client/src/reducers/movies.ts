@@ -24,6 +24,13 @@ export const moviesReducer = (state: Movie[] = [], action: MoviesAction) => {
     case MoviesActionTypes.updateMovie:
       return state;
 
+    case MoviesActionTypes.sortByYear:
+      if (action.payload) {
+        return state.slice().sort((a, b) => (a.Year > b.Year ? 1 : -1));
+      } else {
+        return state.slice().sort((a, b) => (a.Year > b.Year ? -1 : 1));
+      }
+
     default:
       return state;
   }

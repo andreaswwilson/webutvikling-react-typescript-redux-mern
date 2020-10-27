@@ -73,6 +73,18 @@ export const toggleFavoriteMovie = (id: string): ToggleFavoriteMovieAction => {
   };
 };
 
+export interface SortByYearMovieAction {
+  type: MoviesActionTypes.sortByYear;
+  payload: boolean;
+}
+
+export const sortByYear = (reversed: boolean): SortByYearMovieAction => {
+  return {
+    type: MoviesActionTypes.sortByYear,
+    payload: reversed,
+  };
+};
+
 export interface UpdateMovieAction {
   type: MoviesActionTypes.updateMovie;
   payload: any;

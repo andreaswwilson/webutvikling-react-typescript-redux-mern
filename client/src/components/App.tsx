@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   Movie,
   fetchMovies,
@@ -7,10 +7,20 @@ import {
   Page,
   prevPage,
   nextPage,
+  sortByYear,
 } from '../actions';
 import { StoreState } from '../reducers';
 import { connect } from 'react-redux';
-import { Container, Spinner, Row, Col } from 'reactstrap';
+import {
+  Container,
+  Spinner,
+  Row,
+  Col,
+  Dropdown,
+  DropdownToggle,
+  DropdownMenu,
+  DropdownItem,
+} from 'reactstrap';
 import { MovieCard } from './MovieCard';
 import './style.css';
 
@@ -22,6 +32,7 @@ interface Props {
   page: Page;
   nextPage: typeof nextPage;
   prevPage: typeof prevPage;
+  sortByYear: typeof sortByYear;
 }
 
 export const _App: React.FC<Props> = ({
@@ -32,10 +43,15 @@ export const _App: React.FC<Props> = ({
   page,
   prevPage,
   nextPage,
+  sortByYear,
 }): JSX.Element => {
   useEffect(() => {
     fetchMovies();
   }, []);
+
+  // Usestate for locally keep state for dropdown sort button
+  const [dropdownOpen, setDropdownOpen] = useState(false);
+  const toggle = () => setDropdownOpen((prevState) => !prevState);
 
   const renderMovies = () => {
     return movies.map((movie: Movie) => {
@@ -52,6 +68,39 @@ export const _App: React.FC<Props> = ({
 
   return (
     <Container>
+      <Dropdown isOpen={dropdownOpen} toggle={toggle}>
+        <DropdownToggle caret>Sort</DropdownToggle>
+        <DropdownMenu>
+          <DropdownItem
+            onClick={() => {
+              sortByYear(true);
+            }}
+          >
+            Sort by year ascending
+          </DropdownItem>
+          <DropdownItem
+            onClick={() => {
+              sortByYear(false);
+            }}
+          >
+            Sort by year descending
+          </DropdownItem>
+        </DropdownMenu>
+      </Dropdown>
+      {/* <button
+        onClick={() => {
+          sortByYear(false);
+        }}
+      >
+        Sort by newest
+      </button>
+      <button
+        onClick={() => {
+          sortByYear(true);
+        }}
+      >
+        Sort by old
+      </button> */}
       <Row className='justify-content-md-center'>
         {movies.length === 0 && (
           <Col xs='1'>
@@ -77,4 +126,5 @@ export const App = connect(mapStateToProps, {
   nextPage,
   prevPage,
   toggleFavoriteMovie,
+  sortByYear,
 })(_App);
