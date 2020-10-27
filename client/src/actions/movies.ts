@@ -38,8 +38,7 @@ export interface FetchMoviesAction {
 }
 
 export const fetchMovies = () => {
-  const page = 1;
-  const url = 'http://localhost:5000/api/movies/page/' + page;
+  const url = 'http://localhost:5000/api/movies/page/' + '1';
   return async (dispatch: Dispatch) => {
     const response = await axios.get(url);
 
@@ -76,7 +75,7 @@ export const toggleFavoriteMovie = (id: string): ToggleFavoriteMovieAction => {
 
 export interface UpdateMovieAction {
   type: MoviesActionTypes.updateMovie;
-  payload: JSON;
+  payload: any;
 }
 
 export const updateMovie = (movie: Movie) => {

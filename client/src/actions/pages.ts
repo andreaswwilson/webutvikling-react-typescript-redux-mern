@@ -1,49 +1,35 @@
 import { PageActionTypes } from './';
 
 export interface Page {
-    page: number;
-}
-
-export const setPage = (page: number) => {
-    return {
-        type: PageActionTypes.setPage,
-        payload: page
-    }
-}
-
-export const getPage = () => {
-    return {
-        type: PageActionTypes.setPage,
-        payload: 1
-    }
-}
-
-export const nextPage = (page: number) => {
-    return {
-        type: PageActionTypes.nextPage,
-        payload: page + 1
-    }
-}
-
-export const prevPage = (page: number) => {
-    return {
-        type: PageActionTypes.prevPage,
-        payload: page - 1
-    }
+  page: number;
 }
 
 export interface SetPageAction {
-    type: PageActionTypes.setPage;
-    payload: Page;
+  type: PageActionTypes.setPage;
+  payload: number;
 }
+
+export const setPage = (page: number): SetPageAction => {
+  return {
+    type: PageActionTypes.setPage,
+    payload: page,
+  };
+};
 
 export interface NextPageAction {
-    type: PageActionTypes.nextPage;
-    payload: Page;
+  type: PageActionTypes.nextPage;
 }
+export const nextPage = (): NextPageAction => {
+  return {
+    type: PageActionTypes.nextPage,
+  };
+};
 
 export interface PrevPageAction {
-    type: PageActionTypes.prevPage;
-    payload: Page;
+  type: PageActionTypes.prevPage;
 }
-
+export const prevPage = (): PrevPageAction => {
+  return {
+    type: PageActionTypes.prevPage,
+  };
+};
