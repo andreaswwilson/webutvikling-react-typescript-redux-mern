@@ -4,7 +4,7 @@ import { StoreState } from '../reducers';
 import { connect } from 'react-redux';
 import { Container, Spinner, Row, Col } from 'reactstrap';
 import { MovieCard } from './MovieCard';
-import SearchBar from "./SearchBar";
+import Search from "./Search";
 import './style.css';
 
 interface Props {
@@ -36,7 +36,7 @@ export const _App: React.FC<Props> = ({
 
   return (
     <Container>
-      <SearchBar />
+      <Search />
       {movies.length === 0 && (
         <Row className='justify-content-md-center'>
           <Col xs='1'>
