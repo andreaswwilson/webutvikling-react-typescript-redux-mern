@@ -9,11 +9,12 @@ import {
 import { SetPageAction, NextPageAction, PrevPageAction } from './pages';
 
 export enum MoviesActionTypes {
-  fetchMovies,
-  deleteMovie,
-  toggleFavorite,
-  searchMovies,
-  updateMovie,
+  fetchMovies = 'FETCH_MOVIES',
+  deleteMovie = 'DELETE_MOVIE',
+  toggleFavorite = 'TOGGLE_FAVORITE',
+  searchMovies = 'SEARCH_MOVIES',
+  updateMovie = 'UPDATE MOVIE',
+
 }
 
 export type MoviesAction =
@@ -21,11 +22,12 @@ export type MoviesAction =
   | DeleteMovieAction
   | ToggleFavoriteMovieAction
   | SearchMoviesAction
-//export const SEARCH_MOVIE = 'SEARCH_MOVIE'
   | UpdateMovieAction;
 
-export const SET_PAGE = 'SET_PAGE';
-export const NEXT_PAGE = 'NEXT_PAGE';
-export const PREV_PAGE = 'PREV_PAGE';
+export enum PageActionTypes {
+  setPage = 'SET_PAGE',
+  nextPage = 'NEXT_PAGE',
+  prevPage = 'PREV_PAGE',
+}
 
 export type PageAction = SetPageAction | NextPageAction | PrevPageAction;
