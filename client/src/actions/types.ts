@@ -20,8 +20,10 @@ export type MoviesAction =
   | ToggleFavoriteMovieAction
   | UpdateMovieAction;
 
-export const SET_PAGE = 'SET_PAGE';
-export const NEXT_PAGE = 'NEXT_PAGE';
-export const PREV_PAGE = 'PREV_PAGE';
+export enum PageActionTypes {
+  setPage = 'SET_PAGE',
+  nextPage = 'NEXT_PAGE',
+  prevPage = 'PREV_PAGE',
+}
 
 export type PageAction = SetPageAction | NextPageAction | PrevPageAction;
