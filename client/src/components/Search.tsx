@@ -11,6 +11,8 @@ const Search: FC = () => {
 
     const changeHandler = (e: FormEvent<HTMLInputElement>) => {
         console.log(e.currentTarget.value);
+
+        //Saves the search value in search
         setSearch(e.currentTarget.value);
     }
 
