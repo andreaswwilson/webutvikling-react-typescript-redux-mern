@@ -1,29 +1,13 @@
 import { Response, Request } from 'express';
 import { DB } from '../../database';
 import { Router } from '../Router';
-/**
- * @route   GET api/movies
- * @desc    Get all movies
- * @access  Public
- */
-Router.instance.get('/', async (req: Request, res: Response) => {
-  try {
-    req === req; // remove annoying "req not used warning"
-    const movies = await DB.Models.Movie.find({});
-    if (!movies) throw Error('No items');
-
-    res.status(200).json(movies);
-  } catch (e) {
-    res.status(400).json({ msg: e.message });
-  }
-});
 
 /**
  * @route Get api/movies/:id
  * @desc Get movie by id
  * @access Public
  */
-Router.instance.get('/id/:id', async (req: Request, res: Response) => {
+Router.instance.get('/:id', async (req: Request, res: Response) => {
   try {
     const movie = await DB.Models.Movie.findById(req.params.id);
     if (!movie) throw Error('No record found');
@@ -34,34 +18,28 @@ Router.instance.get('/id/:id', async (req: Request, res: Response) => {
 });
 
 /**
- * @route Get api/movies/year/:year
- * @desc get movie by year
- * @access Public
+ * @route   GET api/movies
+ * @desc    Get all movies
+ * @access  Public
  */
-Router.instance.get('/year/:year', async (req: Request, res: Response) => {
+Router.instance.get('/', async (req: Request, res: Response) => {
   try {
-    const movie = await DB.Models.Movie.find({ Year: req.params.year });
-    if (!movie) throw Error('No record found');
-    res.status(200).json(movie);
-  } catch (error) {
-    res.status(400).json({ year: req.params.year, msg: error.message });
-  }
-});
+    let { title, genre, year } = req.query;
+    if (typeof title !== 'string') {
+      title = '';
+    }
+    let query: any = {};
+    title && (query.Title = title);
+    genre && (query.Genre = genre);
+    year && (query.Year = year);
+    console.log(query);
+    const movies = await DB.Models.Movie.find(query);
 
-/**
- * @route Get api/movies/title/:title
- * @desc get movie by a partial title. case-insensitive
- * @access Public
- */
-Router.instance.get('/title/:title', async (req: Request, res: Response) => {
-  try {
-    const movie = await DB.Models.Movie.find({
-      Title: { $regex: req.params.title, $options: 'i' }, // option i = case insensitive
-    });
-    if (!movie) throw Error('No record found');
-    res.status(200).json(movie);
-  } catch (error) {
-    res.status(400).json({ year: req.params.title, msg: error.message });
+    if (!movies) throw Error('No items');
+
+    res.status(200).json(movies);
+  } catch (e) {
+    res.status(400).json({ msg: e.message });
   }
 });
 
@@ -70,7 +48,7 @@ Router.instance.get('/title/:title', async (req: Request, res: Response) => {
  * @desc Update movie
  * @access Public
  */
-Router.instance.put('/id/:id', async (req: Request, res: Response) => {
+Router.instance.put('/:id', async (req: Request, res: Response) => {
   try {
     // Create new Movie object
     const updatedMovie = new DB.Models.Movie(req.body);

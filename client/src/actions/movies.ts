@@ -79,7 +79,7 @@ export interface UpdateMovieAction {
 }
 
 export const updateMovie = (movie: Movie) => {
-  const url = 'http://localhost:5000/api/movies/id/' + movie._id;
+  const url = 'http://localhost:5000/api/movies/' + movie._id;
   console.log('URL:' + url);
   return async (dispatch: Dispatch) => {
     const response = await axios.put(url, movie);
