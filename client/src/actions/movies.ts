@@ -75,7 +75,7 @@ export const toggleFavoriteMovie = (id: string): ToggleFavoriteMovieAction => {
 
 export interface UpdateMovieAction {
   type: MoviesActionTypes.updateMovie;
-  payload: JSON;
+  payload: any;
 }
 
 export const updateMovie = (movie: Movie) => {

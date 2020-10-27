@@ -17,6 +17,20 @@ Router.instance.get('/:id', async (req: Request, res: Response) => {
   }
 });
 
+Router.instance.get('/page/:page', async (req: Request, res: Response) => {
+  try {
+    const movies = await DB.Models.Movie.find();
+    const page = parseInt(req.params.page);
+    const perPage = 3;
+    const skipped = (page - 1) * perPage;
+    if (!movies) throw Error('No record found');
+    const paginatedMovies = movies.slice(skipped, skipped + perPage)
+    res.status(200).json(paginatedMovies);
+  } catch (error) {
+    res.status(400).json({ id: req.params.id, msg: error.message });
+  }
+});
+
 /**
  * @route   GET api/movies
  * @desc    Get all movies
