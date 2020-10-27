@@ -1,7 +1,6 @@
 import axios from 'axios';
-import { MoviesActionTypes } from './';
+import { MoviesActionTypes } from '.';
 import { Dispatch } from 'redux';
-
 export interface Movie {
   _id: string;
   Title: string;
@@ -82,6 +81,24 @@ export const sortByYear = (reversed: boolean): SortByYearMovieAction => {
   return {
     type: MoviesActionTypes.sortByYear,
     payload: reversed,
+  };
+};
+export interface SearchMoviesAction {
+  type: MoviesActionTypes.searchMovies;
+  payload: Movie[];
+}
+
+//dispatching the action type and payload which will make the reducer recognize the actions
+export const SearchMovie = (title: string) => {
+  const url = 'http://localhost:5000/api/movies/title/' + title;
+
+  return async (dispatch: Dispatch) => {
+    const response = await axios.get(url);
+
+    dispatch<SearchMoviesAction>({
+      type: MoviesActionTypes.searchMovies,
+      payload: response.data,
+    });
   };
 };
 

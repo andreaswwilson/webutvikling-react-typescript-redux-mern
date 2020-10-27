@@ -22,6 +22,7 @@ import {
   DropdownItem,
 } from 'reactstrap';
 import { MovieCard } from './MovieCard';
+import Search from './Search';
 import './style.css';
 
 interface Props {
@@ -87,20 +88,9 @@ export const _App: React.FC<Props> = ({
           </DropdownItem>
         </DropdownMenu>
       </Dropdown>
-      {/* <button
-        onClick={() => {
-          sortByYear(false);
-        }}
-      >
-        Sort by newest
-      </button>
-      <button
-        onClick={() => {
-          sortByYear(true);
-        }}
-      >
-        Sort by old
-      </button> */}
+
+      <Search />
+
       <Row className='justify-content-md-center'>
         {movies.length === 0 && (
           <Col xs='1'>
