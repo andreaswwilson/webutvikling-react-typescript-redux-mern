@@ -94,7 +94,7 @@ export const _App: React.FC<Props> = ({
   const paginate = (pageNumber: number) => setCurrentPage(pageNumber);
 
   const renderMovies = () => {
-    return movieState.movies.map((movie: Movie) => {
+    return currentMovies.map((movie: Movie) => {
       return (
         <MovieCard
           movie={movie}
@@ -105,30 +105,8 @@ export const _App: React.FC<Props> = ({
       );
     });
   };
-
   return (
     <Container>
-      <div className='sort-dropdown'>
-        <Dropdown isOpen={dropdownOpen} toggle={toggle}>
-          <DropdownToggle caret>Sort</DropdownToggle>
-          <DropdownMenu>
-            <DropdownItem
-              onClick={() => {
-                sortByYear(true);
-              }}
-            >
-              Sort by year ascending
-            </DropdownItem>
-            <DropdownItem
-              onClick={() => {
-                sortByYear(false);
-              }}
-            >
-              Sort by year descending
-            </DropdownItem>
-          </DropdownMenu>
-        </Dropdown>
-      </div>
       <Search />
       <Row className='justify-content-md-center'>
         <Col className='mx-auto text-center'>
