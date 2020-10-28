@@ -109,8 +109,11 @@ export interface SearchMoviesAction {
 }
 
 //dispatching the action type and payload which will make the reducer recognize the actions
-export const SearchMovie = (title: string) => {
-  const url = 'http://localhost:5000/api/movies/title/' + title;
+export const searchMovie = (title: string) => {
+  let url = 'http://localhost:5000/api/movies'; // If no search string, return all movies
+  if (title.length > 0) {
+    url = 'http://localhost:5000/api/movies/title/' + title;
+  }
 
   return async (dispatch: Dispatch) => {
     const response = await axios.get(url);

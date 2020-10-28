@@ -39,7 +39,7 @@ export const moviesReducer = (
       };
 
     case MoviesActionTypes.searchMovies:
-      return { ...state, movie: action.payload };
+      return { ...state, movies: action.payload };
 
     case MoviesActionTypes.filterByCategory:
       var newState = state.movies.slice();

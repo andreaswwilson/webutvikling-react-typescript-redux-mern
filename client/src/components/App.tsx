@@ -25,7 +25,6 @@ import {
   DropdownItem,
   FormGroup,
   Label,
-  Input,
   CustomInput,
 } from 'reactstrap';
 import { MovieCard } from './MovieCard';
@@ -62,20 +61,27 @@ export const _App: React.FC<Props> = ({
   // Usestate for locally keep state for dropdown sort button
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const toggle = () => setDropdownOpen((prevState) => !prevState);
+
   // Use state for locally keep state of checkbox
   const [checkBoxFilter, setCheckBoxFilter] = useState<string[]>([]);
   const toggleCheckbox = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.checked) {
       setCheckBoxFilter([...checkBoxFilter, event.target.id]);
     } else {
-      fetchMovies();
       setCheckBoxFilter(
         checkBoxFilter.filter((item) => item != event.target.id),
       );
     }
   };
+
+  // Run filter function everytime checkbox is changed
   useEffect(() => {
-    filterByCategory(checkBoxFilter);
+    if (checkBoxFilter.length > 0) {
+      filterByCategory(checkBoxFilter);
+    } else {
+      // reload all movies if no checkbox
+      fetchMovies();
+    }
   }, [checkBoxFilter]);
 
   //states for keeping track of page number
