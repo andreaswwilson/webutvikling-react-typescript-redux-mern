@@ -34,9 +34,31 @@ for this procject.
 
 # Client
 
-The client is build on typescript, redux, bootstrap/reactstrap and axios. Redux is used for handeling the state of
-movies and pagination. For states limited to local files we have used react hooks to simplifiy the program and to avoid
+The client is build on typescript, redux, bootstrap/reactstrap, react-router and axios.
+
+## State management
+
+State management is done by usage of both redux and react hooks.
+Redux is used for handeling the state of movies and pagination. For movies the states that are handled are an array
+of all movies we currently are showing the user.
+
+For states limited to local files we have used react hooks to simplifiy the program and to avoid
 passing states around that are not necassary to keep in a global store.
+
+## Content and functionallity
+
+1. Search - the user can filter based on a search done by title. The search is querying the backend and the backend
+   returns the hits.
+2. Presentation of movies with pagination to prepare for handeling of big result of data. This is done in the front end
+   for us since.
+3. By clicking on the movie more information of that movie is shown.
+4. Sorting and filtering - the user can sort all the movies by year, ascending or descending. The user can filter by
+   up to three Genres that are accumulative filtered.
+5. User generated data that is save to the backend. If a movie is added as a favorite, this choice is saved in the
+   database. The user can add reviews to every movie which are saved to the database.
+6. Database is hosted on the virtual machine and loaded with 20 movies.
+
+## Testing
 
 # Git
 
