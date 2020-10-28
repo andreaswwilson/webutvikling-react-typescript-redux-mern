@@ -12,6 +12,7 @@ const Search: FC = () => {
     const changeHandler = (e: FormEvent<HTMLInputElement>) => {
         //Saves the search value in search
         setSearch(e.currentTarget.value);
+        //Dynamic search while typing in the title of the film
         dispatch(SearchMovie(search))
     }
 
