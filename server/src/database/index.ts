@@ -1,5 +1,5 @@
 // reference: https://know-thy-code.com/mongoose-schemas-models-typescript/
-// Database connection using singleton pattern - see https://www.tutorialspoint.com/design_pattern/singleton_pattern.htm
+
 import { connect, connection, Connection, ConnectionOptions } from 'mongoose';
 import { Movie, MovieModel } from '../models';
 
@@ -7,6 +7,7 @@ declare interface IModels {
   Movie: MovieModel;
 }
 
+// Database connection using singleton pattern - see https://www.tutorialspoint.com/design_pattern/singleton_pattern.htm
 export class DB {
   private static instance: DB;
 
@@ -17,7 +18,7 @@ export class DB {
     useNewUrlParser: true,
     useUnifiedTopology: true,
     user: 'admin',
-    pass: 'admin',
+    pass: 'admin', // Hardcoded password! :D If this comment is here we forgot to move the password to env
   };
 
   private constructor() {
@@ -34,6 +35,7 @@ export class DB {
     };
   }
 
+  // If the instance exist return it, else make it
   public static get Models() {
     if (!DB.instance) {
       DB.instance = new DB();
