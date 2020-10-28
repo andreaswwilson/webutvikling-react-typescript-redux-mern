@@ -13,6 +13,7 @@ import {
 } from '../actions';
 import { StoreState } from '../reducers';
 import { connect } from 'react-redux';
+import { Pagination } from './Pagination';
 import {
   Container,
   Spinner,
@@ -77,6 +78,21 @@ export const _App: React.FC<Props> = ({
     filterByCategory(checkBoxFilter);
   }, [checkBoxFilter]);
 
+  //states for keeping track of page number
+  const [currentPage, setCurrentPage] = useState(1);
+  const [moviesPerPage, setMoviesPerPage] = useState(4);
+
+  //calculate
+  const indexOfLastMovie = currentPage * moviesPerPage;
+  const indexOfFirstMovie = indexOfLastMovie - moviesPerPage;
+  const currentMovies = movieState.movies.slice(
+    indexOfFirstMovie,
+    indexOfLastMovie,
+  );
+
+  //function for switching pageNumber
+  const paginate = (pageNumber: number) => setCurrentPage(pageNumber);
+
   const renderMovies = () => {
     return movieState.movies.map((movie: Movie) => {
       return (
@@ -92,6 +108,27 @@ export const _App: React.FC<Props> = ({
 
   return (
     <Container>
+      <div className='sort-dropdown'>
+        <Dropdown isOpen={dropdownOpen} toggle={toggle}>
+          <DropdownToggle caret>Sort</DropdownToggle>
+          <DropdownMenu>
+            <DropdownItem
+              onClick={() => {
+                sortByYear(true);
+              }}
+            >
+              Sort by year ascending
+            </DropdownItem>
+            <DropdownItem
+              onClick={() => {
+                sortByYear(false);
+              }}
+            >
+              Sort by year descending
+            </DropdownItem>
+          </DropdownMenu>
+        </Dropdown>
+      </div>
       <Search />
       <Row className='justify-content-md-center'>
         <Col className='mx-auto text-center'>
@@ -159,9 +196,11 @@ export const _App: React.FC<Props> = ({
           <h1>No movies found</h1>
         )}
       </Row>
-      <button onClick={() => prevPage()}> prev </button>
-      <p>Page: {page.page} </p>
-      <button onClick={() => nextPage()}> next </button>
+      <Pagination
+        moviesPerPage={moviesPerPage}
+        totalMovies={movieState.movies.length}
+        paginate={paginate}
+      />
     </Container>
   );
 };
