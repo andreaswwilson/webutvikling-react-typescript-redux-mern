@@ -31,6 +31,11 @@ export interface Movie {
   Reviews?: string[];
 }
 
+export interface MovieState {
+  movies: Movie[];
+  isLoading: boolean;
+}
+
 export interface FetchMoviesAction {
   type: MoviesActionTypes.fetchMovies;
   payload: Movie[];
@@ -83,6 +88,21 @@ export const sortByYear = (reversed: boolean): SortByYearMovieAction => {
     payload: reversed,
   };
 };
+
+export interface FilterByCategoryAction {
+  type: MoviesActionTypes.filterByCategory;
+  payload: string[];
+}
+
+export const filterByCategory = (
+  categories: string[],
+): FilterByCategoryAction => {
+  return {
+    type: MoviesActionTypes.filterByCategory,
+    payload: categories,
+  };
+};
+
 export interface SearchMoviesAction {
   type: MoviesActionTypes.searchMovies;
   payload: Movie[];

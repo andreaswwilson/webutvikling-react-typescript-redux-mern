@@ -5,6 +5,7 @@ import {
   SearchMoviesAction,
   UpdateMovieAction,
   SortByYearMovieAction,
+  FilterByCategoryAction,
 } from './movies';
 
 import { SetPageAction, NextPageAction, PrevPageAction } from './pages';
@@ -16,6 +17,7 @@ export enum MoviesActionTypes {
   updateMovie = 'UPDATE_MOVIE',
   sortByYear = 'SORT_BY_YEAR',
   searchMovies = 'SEARCH_MOVIES',
+  filterByCategory = 'FILTER_BY_CATEGORY',
 }
 
 export type MoviesAction =
@@ -25,7 +27,8 @@ export type MoviesAction =
   | UpdateMovieAction
   | SortByYearMovieAction
   | SearchMoviesAction
-  | UpdateMovieAction;
+  | UpdateMovieAction
+  | FilterByCategoryAction;
 
 export enum PageActionTypes {
   setPage = 'SET_PAGE',
