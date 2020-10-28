@@ -1,14 +1,14 @@
 import { combineReducers } from 'redux';
-import { Movie, Page } from '../actions';
+import { MovieState, Page } from '../actions';
 import { moviesReducer } from './movies';
 import { pagesReducer } from './pages';
 
 export interface StoreState {
-  movies: Movie[];
+  movieState: MovieState;
   page: Page;
 }
 
 export const reducers = combineReducers<StoreState>({
-  movies: moviesReducer,
+  movieState: moviesReducer,
   page: pagesReducer,
 });

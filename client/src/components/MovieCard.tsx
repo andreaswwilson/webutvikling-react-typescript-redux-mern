@@ -19,7 +19,6 @@ export const MovieCard: React.FC<Props> = ({
     backgroundSize: 'cover',
     backgroundRepeat: 'no-repeat',
   };
-
   return (
     <Col md='12' lg='6'>
       <a href={'movie/' + movie._id}>
