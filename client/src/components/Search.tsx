@@ -2,7 +2,7 @@ import React, { FC, FormEvent, useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { Form, FormGroup, Input, Container, Row } from 'reactstrap';
 
-import { searchMovie } from '../actions/movies';
+import { updateQuery } from '../actions/movies';
 
 const Search: FC = () => {
   // Handle local state for search bar input
@@ -10,7 +10,7 @@ const Search: FC = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(searchMovie(search));
+    dispatch(updateQuery({ title: search }));
   }, [search]);
 
   const submitHandler = (e: FormEvent<HTMLFormElement>) => {
