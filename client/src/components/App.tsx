@@ -77,16 +77,6 @@ export const _App: React.FC<Props> = ({
     updateQuery({ genre: checkBoxFilter });
   }, [checkBoxFilter]);
 
-  // Run filter function everytime checkbox is changed
-  // useEffect(() => {
-  //   if (checkBoxFilter.length > 0) {
-  //     updateQuery({ genre: checkBoxFilter });
-  //   } else {
-  //     // reload all movies if no checkbox
-  //     fetchMovies({});
-  //   }
-  // }, [checkBoxFilter]);
-
   //states for keeping track of page number
   const [currentPage, setCurrentPage] = useState(1);
   const [moviesPerPage, setMoviesPerPage] = useState(4);
@@ -94,16 +84,12 @@ export const _App: React.FC<Props> = ({
   //calculate
   const indexOfLastMovie = currentPage * moviesPerPage;
   const indexOfFirstMovie = indexOfLastMovie - moviesPerPage;
-  const currentMovies = movieState.movies.slice(
-    indexOfFirstMovie,
-    indexOfLastMovie,
-  );
 
   //function for switching pageNumber
   const paginate = (pageNumber: number) => setCurrentPage(pageNumber);
 
   const renderMovies = () => {
-    return currentMovies.map((movie: Movie) => {
+    return movieState.movies.map((movie: Movie) => {
       return (
         <MovieCard
           movie={movie}
@@ -183,11 +169,11 @@ export const _App: React.FC<Props> = ({
           <h1>No movies found</h1>
         )}
       </Row>
-      {/* <Pagination
-        moviesPerPage={moviesPerPage}
-        totalMovies={movieState.movies.length}
-        paginate={paginate}
-      /> */}
+      <Pagination
+        moviesPerPage={movieState.query.limit || 4}
+        totalMovies={movieState.totalCount}
+        updateQuery={updateQuery}
+      />
     </Container>
   );
 };

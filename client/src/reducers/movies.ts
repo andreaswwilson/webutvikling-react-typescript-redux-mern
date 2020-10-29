@@ -4,7 +4,7 @@ const intialState: MovieState = {
   movies: [],
   isLoading: true,
   totalCount: 0,
-  query: {},
+  query: { limit: 4, page: 1 },
 };
 
 // Movies reducer that manipulate an array of movie-objects
