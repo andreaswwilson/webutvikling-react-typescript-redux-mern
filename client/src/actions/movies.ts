@@ -48,17 +48,19 @@ export interface FetchMoviesProps {
   genre?: string[];
   sort?: string;
   title?: string;
+  limit?: number;
+  page?: number;
 }
 
 export const fetchMovies = (props: FetchMoviesProps) => {
-  const { id, genre, sort, title } = props;
+  const { id, genre, sort, title, limit, page } = props;
   let url = 'http://localhost:5000/api/movies';
   if (typeof id === 'string') {
     url += ('/' + id) as string;
   } else {
     url += '?';
   }
-  console.log(genre);
+
   if (genre) {
     genre.forEach((g) => {
       url += '&genre[]=' + g;
@@ -70,7 +72,13 @@ export const fetchMovies = (props: FetchMoviesProps) => {
   if (title) {
     url += '&title=' + title;
   }
-  console.log('FetchMovies url:', url);
+  if (limit) {
+    url += '&limit=' + limit;
+  }
+  if (page) {
+    url += '&page=' + page;
+  }
+  // console.log('FetchMovies url:', url);
 
   return async (dispatch: Dispatch) => {
     const response = await axios.get(url);
