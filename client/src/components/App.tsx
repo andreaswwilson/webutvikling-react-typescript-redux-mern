@@ -8,8 +8,8 @@ import {
   prevPage,
   nextPage,
   sortByYear,
-  filterByCategory,
   MovieState,
+  updateQuery,
 } from '../actions';
 import { StoreState } from '../reducers';
 import { connect } from 'react-redux';
@@ -36,11 +36,11 @@ interface Props {
   fetchMovies: Function;
   updateMovie: any;
   toggleFavoriteMovie: typeof toggleFavoriteMovie;
+  updateQuery: typeof updateQuery;
   page: Page;
   nextPage: typeof nextPage;
   prevPage: typeof prevPage;
   sortByYear: typeof sortByYear;
-  filterByCategory: typeof filterByCategory;
 }
 
 export const _App: React.FC<Props> = ({
@@ -52,11 +52,11 @@ export const _App: React.FC<Props> = ({
   prevPage,
   nextPage,
   sortByYear,
-  filterByCategory,
+  updateQuery,
 }): JSX.Element => {
   useEffect(() => {
-    fetchMovies();
-  }, []);
+    fetchMovies(movieState.query);
+  }, [movieState.query]);
 
   // Usestate for locally keep state for dropdown sort button
   const [dropdownOpen, setDropdownOpen] = useState(false);
@@ -73,16 +73,19 @@ export const _App: React.FC<Props> = ({
       );
     }
   };
+  useEffect(() => {
+    updateQuery({ genre: checkBoxFilter });
+  }, [checkBoxFilter]);
 
   // Run filter function everytime checkbox is changed
-  useEffect(() => {
-    if (checkBoxFilter.length > 0) {
-      filterByCategory(checkBoxFilter);
-    } else {
-      // reload all movies if no checkbox
-      fetchMovies();
-    }
-  }, [checkBoxFilter]);
+  // useEffect(() => {
+  //   if (checkBoxFilter.length > 0) {
+  //     updateQuery({ genre: checkBoxFilter });
+  //   } else {
+  //     // reload all movies if no checkbox
+  //     fetchMovies({});
+  //   }
+  // }, [checkBoxFilter]);
 
   //states for keeping track of page number
   const [currentPage, setCurrentPage] = useState(1);
@@ -136,7 +139,7 @@ export const _App: React.FC<Props> = ({
             </DropdownMenu>
           </Dropdown>
           <FormGroup>
-            <Label for='exampleCheckbox'>Filter by category:</Label>
+            <Label for='categoryCHeckbox'>Filter by category:</Label>
             <div>
               <CustomInput
                 type='checkbox'
@@ -180,11 +183,11 @@ export const _App: React.FC<Props> = ({
           <h1>No movies found</h1>
         )}
       </Row>
-      <Pagination
+      {/* <Pagination
         moviesPerPage={moviesPerPage}
         totalMovies={movieState.movies.length}
         paginate={paginate}
-      />
+      /> */}
     </Container>
   );
 };
@@ -200,5 +203,5 @@ export const App = connect(mapStateToProps, {
   prevPage,
   toggleFavoriteMovie,
   sortByYear,
-  filterByCategory,
+  updateQuery,
 })(_App);

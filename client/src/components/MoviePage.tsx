@@ -20,20 +20,25 @@ export const _MoviePage: React.FC<Props> = ({
   // USing state locally just for forminput handeling
   const [formInput, setFormInput] = React.useState('');
   useEffect(() => {
-    fetchMovies();
+    fetchMovies({ id: params.id });
   }, [params.id]);
   const movie: Movie = movieState.movies.filter((m) => m._id === params.id)[0];
-
+  console.log(movieState);
   const renderReviews = () => {
     const reviews = movie.Reviews || [];
     return reviews.map((review: string) => {
-      return <div className='Review'> {review}</div>;
+      return (
+        <div className='Review' key={review}>
+          {' '}
+          {review}
+        </div>
+      );
     });
   };
 
   if (movie) {
     return (
-      <div className='MoviePage'>
+      <div className='MoviePage' key={movie._id}>
         <Container>
           <img src={movie.Poster} className='moviePoster' />
 

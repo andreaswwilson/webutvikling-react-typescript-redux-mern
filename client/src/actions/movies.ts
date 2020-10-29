@@ -34,21 +34,54 @@ export interface Movie {
 export interface MovieState {
   movies: Movie[];
   isLoading: boolean;
+  totalCount: number;
+  query: FetchMoviesProps;
 }
 
 export interface FetchMoviesAction {
   type: MoviesActionTypes.fetchMovies;
-  payload: Movie[];
+  payload: { totalCount: number; movies: Movie[]; query: FetchMoviesProps };
 }
 
-export const fetchMovies = () => {
-  const url = 'http://localhost:5000/api/movies';
+export interface FetchMoviesProps {
+  id?: string;
+  genre?: string[];
+  sort?: string;
+  title?: string;
+}
+
+export const fetchMovies = (props: FetchMoviesProps) => {
+  const { id, genre, sort, title } = props;
+  let url = 'http://localhost:5000/api/movies';
+  if (typeof id === 'string') {
+    url += ('/' + id) as string;
+  } else {
+    url += '?';
+  }
+  console.log(genre);
+  if (genre) {
+    genre.forEach((g) => {
+      url += '&genre[]=' + g;
+    });
+  }
+  if (sort) {
+    url += '&sort=' + sort;
+  }
+  if (title) {
+    url += '&title=' + title;
+  }
+  console.log('FetchMovies url:', url);
+
   return async (dispatch: Dispatch) => {
     const response = await axios.get(url);
 
     dispatch<FetchMoviesAction>({
       type: MoviesActionTypes.fetchMovies,
-      payload: response.data,
+      payload: {
+        totalCount: response.data.totalCount,
+        movies: response.data.data,
+        query: props,
+      },
     });
   };
 };
@@ -89,42 +122,6 @@ export const sortByYear = (reversed: boolean): SortByYearMovieAction => {
   };
 };
 
-export interface FilterByCategoryAction {
-  type: MoviesActionTypes.filterByCategory;
-  payload: string[];
-}
-
-export const filterByCategory = (
-  categories: string[],
-): FilterByCategoryAction => {
-  return {
-    type: MoviesActionTypes.filterByCategory,
-    payload: categories,
-  };
-};
-
-export interface SearchMoviesAction {
-  type: MoviesActionTypes.searchMovies;
-  payload: Movie[];
-}
-
-//dispatching the action type and payload which will make the reducer recognize the actions
-export const searchMovie = (title: string) => {
-  let url = 'http://localhost:5000/api/movies'; // If no search string, return all movies
-  if (title.length > 0) {
-    url = 'http://localhost:5000/api/movies/title/' + title;
-  }
-
-  return async (dispatch: Dispatch) => {
-    const response = await axios.get(url);
-
-    dispatch<SearchMoviesAction>({
-      type: MoviesActionTypes.searchMovies,
-      payload: response.data,
-    });
-  };
-};
-
 export interface UpdateMovieAction {
   type: MoviesActionTypes.updateMovie;
   payload: any;
@@ -140,5 +137,17 @@ export const updateMovie = (movie: Movie) => {
       type: MoviesActionTypes.updateMovie,
       payload: response.data,
     });
+  };
+};
+
+export interface UpdateQueryAction {
+  type: MoviesActionTypes.updateQuery;
+  payload: FetchMoviesProps;
+}
+
+export const updateQuery = (props: FetchMoviesProps): UpdateQueryAction => {
+  return {
+    type: MoviesActionTypes.updateQuery,
+    payload: props,
   };
 };

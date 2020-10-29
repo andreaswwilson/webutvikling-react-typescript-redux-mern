@@ -3,6 +3,8 @@ import { Movie, MoviesAction, MoviesActionTypes, MovieState } from '../actions';
 const intialState: MovieState = {
   movies: [],
   isLoading: true,
+  totalCount: 0,
+  query: {},
 };
 
 // Movies reducer that manipulate an array of movie-objects
@@ -13,14 +15,13 @@ export const moviesReducer = (
   switch (action.type) {
     // If we are fetching all movies just return all
     case MoviesActionTypes.fetchMovies:
-      return { isLoading: false, movies: action.payload };
-    case MoviesActionTypes.deleteMovie:
       return {
         ...state,
-        movies: state.movies.filter(
-          (movie: Movie) => movie._id !== action.payload,
-        ),
+        isLoading: false,
+        movies: action.payload.movies,
+        totalCount: action.payload.totalCount,
       };
+
     case MoviesActionTypes.toggleFavorite:
       return {
         ...state,
@@ -37,25 +38,14 @@ export const moviesReducer = (
           };
         }),
       };
-
-    case MoviesActionTypes.searchMovies:
-      return { ...state, movies: action.payload };
-
-    case MoviesActionTypes.filterByCategory:
-      var newState = state.movies.slice();
-      console.log(newState, action.payload);
-      action.payload.forEach((genre: string) => {
-        newState = newState.filter((movie: Movie) =>
-          movie.Genre.includes(genre),
-        );
-      });
-      return {
-        ...state,
-        movies: newState,
-      };
-
     case MoviesActionTypes.updateMovie:
       return state;
+    case MoviesActionTypes.updateQuery:
+      // Using {...state.query} to make a copy since object.assign mutates data which is no-no in redux
+      const updatedQuery = Object.assign({ ...state.query }, action.payload);
+
+      // return { ...state, query: action.payload };
+      return { ...state, query: updatedQuery };
 
     case MoviesActionTypes.sortByYear:
       if (action.payload) {
