@@ -91,7 +91,7 @@ export const _App: React.FC<Props> = ({
 
       <Search />
 
-      <Row className='justify-content-md-center'>
+      <Row className='justify-content-md-center' id='arrayOfMovies'>
         {movies.length === 0 && (
           <Col xs='1'>
             <Spinner color='primary' /> Loading

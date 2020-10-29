@@ -2,7 +2,7 @@ import React, { FC, FormEvent, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import {  Form, Button, FormGroup, Input, Container, Row  } from 'reactstrap';
 
-import { SearchMovie} from '../actions/movies'
+import { SearchMovie, fetchMovies } from '../actions/movies'
 
 
 const Search: FC = () => {
@@ -14,6 +14,10 @@ const Search: FC = () => {
         setSearch(e.currentTarget.value);
         //Dynamic search while typing in the title of the film
         dispatch(SearchMovie(search))
+    
+        if(e.currentTarget.value == '') {
+            dispatch(fetchMovies())
+        }
     }
 
     const submitHandler = (e: FormEvent<HTMLFormElement>) => {
