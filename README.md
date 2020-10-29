@@ -32,6 +32,11 @@ We decided not to implement GraphQL after learning about both REST API and Graph
 since REST API was easier to implement and gave us all the functionallity we needed
 for this procject.
 
+GraphQL would be better suited for a bigger project where we had a lot more data to fetch.
+Using GraphQL we would be able to fetch certain parts of the stored data, while with
+REST we need to fetch the entire document and choose what we want in the front-end.
+
+
 # Client
 
 The client is build on typescript, redux, bootstrap/reactstrap, react-router and axios.
