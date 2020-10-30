@@ -1,7 +1,7 @@
 import express from 'express';
 // import { connect } from "./database/database";
 const app = express();
-const port = 3000;
+const port = 5000;
 import moviesRoutes from './routes/api/movies';
 import cors from 'cors';
 

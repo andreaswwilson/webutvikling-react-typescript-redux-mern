@@ -2,7 +2,7 @@ import axios from 'axios';
 import { MoviesActionTypes } from '.';
 import { Dispatch } from 'redux';
 
-const BASE_URL = 'http://localhost:3000/api/movies';
+const BASE_URL = 'http://localhost:5000/api/movies';
 
 // Interace of one movie object
 export interface Movie {
