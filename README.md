@@ -99,7 +99,7 @@ If the above don't work:
 For some reason GitPod and Cypress don't work well together. The second solution will work, but requires a bit more work.
 Here is a screenshot taken 30.10.2020 14:16:38, to prove that it works when running it locally if you don't want to clone the repo:
 
-![Cypress test](https://gitlab.stud.idi.ntnu.no/it2810-h20/team-32/project-3-it2810-group-32/-/blob/master/Images/Cypress-test.png)
+![Cypress test](Images/Cypress-test.png)
 
 The fifth test checks if a user is able to add a review to a movie, but this will add a new review every time the test is run.
 It is easy to remove these reviews after being implemented by running the mongodb query "cy.exec('db.movies.update( {Reviews: "This is a test"}, {\$unset: {Reviews: ""}})')",
