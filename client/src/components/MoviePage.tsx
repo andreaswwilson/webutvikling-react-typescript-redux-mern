@@ -16,14 +16,19 @@ export const _MoviePage: React.FC<Props> = ({
   fetchMovies,
   updateMovie,
 }): JSX.Element => {
+
   const params = useParams() as { id: string };
   // USing state locally just for forminput handeling
   const [formInput, setFormInput] = React.useState('');
+
   useEffect(() => {
     fetchMovies({ id: params.id });
   }, [params.id]);
+
   const movie: Movie = movieState.movies.filter((m) => m._id === params.id)[0];
+
   console.log(movieState);
+
   const renderReviews = () => {
     const reviews = movie.Reviews || [];
     return reviews.map((review: string) => {
@@ -63,9 +68,13 @@ export const _MoviePage: React.FC<Props> = ({
             <b>Actors: </b>
             {movie.Actors}
           </p>
+
           <h3>Plot</h3>
+
           <p>{movie.Plot}</p>
+
           <h2>Add review</h2>
+
           <Form
             onSubmit={(event: React.FormEvent<HTMLFormElement>) => {
               event.preventDefault();
@@ -74,6 +83,7 @@ export const _MoviePage: React.FC<Props> = ({
               } else {
                 movie.Reviews = [formInput];
               }
+              
               console.log(movie);
               if (formInput.length > 5) {
                 updateMovie(movie);
