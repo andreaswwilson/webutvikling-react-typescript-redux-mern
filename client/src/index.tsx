@@ -19,12 +19,13 @@ ReactDOM.render(
       </NavbarBrand>
       <NavbarText>Internet Movie Database</NavbarText>
     </Navbar>
+    {/* Using react-router-dom to switch between components */}
     <Router>
       <Switch>
         <Route path='/movie/:id'>
           <MoviePage />
         </Route>
-        {/* This must be last */}
+        {/* This must be last since the swtich will execute the first match*/}
         <Route exact path='/'>
           <App />
         </Route>

@@ -1,44 +1,32 @@
+// Rendering of a movie page
 import React, { useEffect } from 'react';
-import { connect } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { Button, Container, Form, FormGroup, Input, Label } from 'reactstrap';
-import { Movie, fetchMovies, updateMovie, MovieState } from '../actions';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchSingleMovie, updateMovie } from '../actions/movies';
 import { StoreState } from '../reducers';
 
-interface Props {
-  movieState: MovieState;
-  fetchMovies: Function;
-  updateMovie: Function;
-}
-
-export const _MoviePage: React.FC<Props> = ({
-  movieState,
-  fetchMovies,
-  updateMovie,
-}): JSX.Element => {
-
-  const params = useParams() as { id: string };
+export const MoviePage: React.FC = (): JSX.Element => {
+  const params = useParams() as { id: string }; // get the parameter from react-dom-router
+  const dispatch = useDispatch();
+  const movie = useSelector((state: StoreState) => state.movieState.movie);
   // USing state locally just for forminput handeling
   const [formInput, setFormInput] = React.useState('');
 
   useEffect(() => {
-    fetchMovies({ id: params.id });
+    dispatch(fetchSingleMovie({ id: params.id }));
   }, [params.id]);
-
-  const movie: Movie = movieState.movies.filter((m) => m._id === params.id)[0];
-
-  console.log(movieState);
-
   const renderReviews = () => {
-    const reviews = movie.Reviews || [];
-    return reviews.map((review: string) => {
-      return (
-        <div className='Review' key={review}>
-          {' '}
-          {review}
-        </div>
-      );
-    });
+    if (movie) {
+      const reviews = movie.Reviews || [];
+      return reviews.map((review: string) => {
+        return (
+          <div className='Review' key={review}>
+            {review}
+          </div>
+        );
+      });
+    }
   };
 
   if (movie) {
@@ -78,14 +66,15 @@ export const _MoviePage: React.FC<Props> = ({
           <Form
             onSubmit={(event: React.FormEvent<HTMLFormElement>) => {
               event.preventDefault();
-              if (movie.Reviews) {
+              if (movie && movie.Reviews) {
                 movie.Reviews.push(formInput);
               } else {
-                movie.Reviews = [formInput];
+                if (movie) {
+                  movie.Reviews = [formInput];
+                }
               }
-              
-              console.log(movie);
-              if (formInput.length > 5) {
+
+              if (formInput.length > 5 && movie) {
                 updateMovie(movie);
               }
 
@@ -118,14 +107,3 @@ export const _MoviePage: React.FC<Props> = ({
   }
   return <div></div>;
 };
-
-const mapStateToProps = ({
-  movieState,
-}: StoreState): { movieState: MovieState } => {
-  return { movieState };
-};
-
-export const MoviePage = connect(mapStateToProps, {
-  fetchMovies,
-  updateMovie,
-})(_MoviePage);

@@ -99,13 +99,15 @@ export const fetchMovies = (props: FetchMoviesProps) => {
     });
   };
 };
+
+// Fetch just a single movie.
 export interface FetchSingleMovieAction {
   type: MoviesActionTypes.fetchSingleMovie;
   payload: {
     movie: Movie;
   };
 }
-export const fetchSigleMovie = (props: FetchMoviesProps) => {
+export const fetchSingleMovie = (props: FetchMoviesProps) => {
   const { id } = props;
   if (id) {
     const url = 'http://localhost:5000/api/movies/' + id;
@@ -123,6 +125,7 @@ export const fetchSigleMovie = (props: FetchMoviesProps) => {
   }
 };
 
+// Toggle favorite status of a movie
 export interface ToggleFavoriteMovieAction {
   type: MoviesActionTypes.toggleFavorite;
   payload: string;
@@ -154,8 +157,7 @@ export const updateMovie = (movie: Movie) => {
   };
 };
 
-// Set the queries we whould like to add to th
-
+// Set the queries we whould like to add to the DB when fetching movies
 export interface UpdateQueryAction {
   type: MoviesActionTypes.updateQuery;
   payload: FetchMoviesProps;

@@ -14,14 +14,14 @@ export const Pagination: React.FC<Props> = ({
   updateQuery,
   movieState,
 }): JSX.Element => {
-  //functionanlity for switching pages front-end
+  //functionanlity for selecting pages
   const pageNumbers = [];
   for (let i = 1; i <= Math.ceil(totalMovies / moviesPerPage); i++) {
     pageNumbers.push(i);
   }
   let currentPage = movieState.query.page || 1;
   return (
-    //simple JS for displaying page-links
+    //displaying page-links
     <nav>
       <div className='pageDiv'>
         <ul className='pagination'>

@@ -1,3 +1,4 @@
+// File for organizing types
 import {
   FetchMoviesAction,
   ToggleFavoriteMovieAction,
@@ -9,10 +10,8 @@ import {
 export enum MoviesActionTypes {
   fetchMovies = 'FETCH_MOVIES',
   fetchSingleMovie = 'FETCH_SINGLE_MOVIE',
-  deleteMovie = 'DELETE_MOVIE',
   toggleFavorite = 'TOGGLE_FAVORITE',
   updateMovie = 'UPDATE_MOVIE',
-  sortByYear = 'SORT_BY_YEAR',
   updateQuery = 'UPDATE_QUERY',
 }
 

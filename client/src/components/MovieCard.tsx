@@ -1,3 +1,4 @@
+// File for rendinging a movie card
 import React, { CSSProperties } from 'react';
 import './MovieCard.scss';
 import { Movie, toggleFavoriteMovie, updateMovie } from '../actions';

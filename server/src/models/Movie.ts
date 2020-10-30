@@ -2,6 +2,7 @@
 
 import mongoose from 'mongoose';
 
+// Movie interaface
 export interface IMovie extends mongoose.Document {
   Title: string;
   Year: string;
@@ -32,6 +33,7 @@ export interface MovieModel extends mongoose.Model<IMovie> {}
 export class Movie {
   private _model: mongoose.Model<IMovie>;
 
+  // Create schema
   constructor() {
     const schema = new mongoose.Schema<IMovie>({
       Title: String,
@@ -61,10 +63,11 @@ export class Movie {
       Runtime: String,
       Reviews: Array,
     });
-
+    // Create model
     this._model = mongoose.model<IMovie>('movies', schema);
   }
 
+  // Return model
   public get model(): mongoose.Model<IMovie> {
     return this._model;
   }

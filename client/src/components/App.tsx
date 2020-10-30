@@ -42,10 +42,13 @@ export const _App: React.FC<Props> = ({
   toggleFavoriteMovie,
   updateQuery,
 }): JSX.Element => {
+  // When ever the query is changed we request the movies from the database
+  // with the updated query and set the state
   useEffect(() => {
     fetchMovies(movieState.query);
   }, [movieState.query]);
 
+  console.log('APP moviestate: ', movieState.query.genre);
   // Usestate for locally keep state for dropdown sort button
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const toggle = () => setDropdownOpen((prevState) => !prevState);
@@ -61,10 +64,14 @@ export const _App: React.FC<Props> = ({
       );
     }
   };
+
+  // Update the query when checking a checkbox.
+
   useEffect(() => {
     updateQuery({ genre: checkBoxFilter });
   }, [checkBoxFilter]);
 
+  // Function for looping through the movieState and rendering the movie cards
   const renderMovies = () => {
     return movieState.movies.map((movie: Movie) => {
       return (
@@ -77,12 +84,13 @@ export const _App: React.FC<Props> = ({
       );
     });
   };
-  console.log('App.txt: ', movieState.query);
+
   return (
     <Container>
       <Search />
       <Row className='justify-content-md-center'>
         <Col className='mx-auto text-center'>
+          {/* Dropdown menu for sorting by year */}
           <Dropdown isOpen={dropdownOpen} toggle={toggle}>
             <DropdownToggle caret>Sort</DropdownToggle>
             <DropdownMenu>
@@ -102,6 +110,8 @@ export const _App: React.FC<Props> = ({
               </DropdownItem>
             </DropdownMenu>
           </Dropdown>
+
+          {/* Checkboxes for filtering on category */}
           <FormGroup>
             <Label for='categoryCHeckbox'>Filter by category:</Label>
             <div>
@@ -136,19 +146,26 @@ export const _App: React.FC<Props> = ({
           </FormGroup>
         </Col>
       </Row>
+
+      {/* Here we render the movie cards */}
       <Row className='justify-content-md-center'>
+        {/* If we are loading movies add a spinner */}
         {movieState.isLoading && (
           <Col xs='1'>
             <Spinner color='primary' /> Loading
           </Col>
         )}
+        {/* Render all the movies in the state */}
         {renderMovies()}
+        {/* If we dont have any movies in state and we are not loading return
+        a message of no movies found */}
         {movieState.movies.length === 0 && !movieState.isLoading && (
           <h1>No movies found</h1>
         )}
       </Row>
+      {/* Handeling of Pagination */}
       <Pagination
-        moviesPerPage={movieState.query.limit || 4}
+        moviesPerPage={movieState.query.limit || 4} // set 4 as default
         totalMovies={movieState.totalCount}
         updateQuery={updateQuery}
         movieState={movieState}
@@ -157,10 +174,12 @@ export const _App: React.FC<Props> = ({
   );
 };
 
+// Map the state to props
 const mapStateToProps = ({ movieState }: StoreState) => {
   return { movieState };
 };
 
+// Connect the state to the app
 export const App = connect(mapStateToProps, {
   fetchMovies,
   updateMovie,
