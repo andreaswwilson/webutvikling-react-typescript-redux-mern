@@ -2,6 +2,28 @@
 
 # Project 3 - IT2810 Group 32
 
+# How to run on gitpod
+
+In gitpod everthing should set up automatically - we have testet it multiple times but it takes a couple of mimutes to build so
+have some pation. If you need to start the project again go to the root folder and run npm start
+
+Client is running on localhost:3000 and server is running on localhost:5000
+
+Open the page by going to "open port" and select "open browser"
+![Open browser](Images/openbrower.png)
+
+## If gitpod doesnt start automatically
+
+Open two terminals
+
+1. In terminal 1:
+   cd server -> npm install -> npm start
+2. In terminal 2:
+   cd client -> npm install -> npm start
+
+If an error saying "[nodemon] app crashed - waiting for file changes before starting", try starting it again by running npm start
+
+
 # Overview
 
 This project consists of a client part and a server part
@@ -118,23 +140,3 @@ is thoroughly tested and working, before merging it to the master branch. By doi
 We have also made a link between the commits and the issues by refering to the issue by #<number>. In hindsight we realised that we could have used issues more frequently
 and for smaller things that needed fixing, but it still worked well for our use case.
 
-# How to run on gitpod
-
-In gitpod everthing should set up automatically - we have testet it multiple times but it takes a couple of mimutes to build so
-have some pation. If you need to start the project again go to the root folder and run npm start
-
-Client is running on localhost:3000 and server is running on localhost:5000
-
-Open the page by going to "open port" and select "open browser"
-![Open browser](Images/openbrower.png)
-
-## If gitpod doesnt start automatically
-
-Open two terminals
-
-1. In terminal 1:
-   cd server -> npm install -> npm start
-2. In terminal 2:
-   cd client -> npm install -> npm start
-
-If an error saying "[nodemon] app crashed - waiting for file changes before starting", try starting it again by running npm start
