@@ -7,6 +7,38 @@
 
 This project consists of a server part and a client part
 
+
+
+# Client
+
+The client is build on typescript, redux, bootstrap/reactstrap, react-router and axios.
+
+## State management
+
+State management is done by usage of both redux and react hooks.
+Redux is used for handeling the state of movies and pagination. For movies the states that are handled are an array
+of all movies we currently are showing the user.
+
+For states limited to local files we have used react hooks to simplifiy the program and to avoid
+passing states around that are not necassary to keep in a global store.
+
+## Content and functionality
+
+1. Search - the user can do a search on movie titles. The search will query the backend via the API and the backend
+   returns the matches.
+2. Presentation of movies with pagination to prepare for handling of a large dataset and increase readability for the user. 
+   This is also done by using the API and the back-end. 
+3. By clicking on a movie more information of that movie is shown. This is done by querying for the specific movie ID in the database via the API.
+4. Sorting and filtering - the user can sort all the movies by year, ascending or descending. The user can filter by
+   up to three Genres that are accumulative filtered. All this should work in combination with search as well. 
+   Like the other 
+5. User generated data that is saved to the backend. If a movie is added as a favorite, this choice is saved in the
+   database (Clicking the little heart symbol on the front page will turn it red and save it as a favorite). 
+   The user can add also reviews to every movie which are saved to the database. There is no user-specific functionality 
+   in place so all reviews are anonymous.
+6. Database is hosted on the virtual machine using MongoDB and contains a total of 20 movies.
+
+
 # Server
 
 ## REST API
@@ -45,35 +77,6 @@ GraphQL would be better suited for a bigger project where we had a lot more data
 Using GraphQL we would be able to fetch certain parts of the stored data, while with
 REST we need to fetch the entire document and choose what we want in the front-end.
 
-
-# Client
-
-The client is build on typescript, redux, bootstrap/reactstrap, react-router and axios.
-
-## State management
-
-State management is done by usage of both redux and react hooks.
-Redux is used for handeling the state of movies and pagination. For movies the states that are handled are an array
-of all movies we currently are showing the user.
-
-For states limited to local files we have used react hooks to simplifiy the program and to avoid
-passing states around that are not necassary to keep in a global store.
-
-## Content and functionality
-
-1. Search - the user can do a search on movie titles. The search will query the backend via the API and the backend
-   returns the matches.
-2. Presentation of movies with pagination to prepare for handling of a large dataset and increase readability for the user. 
-   This is also done by using the API and the back-end. 
-3. By clicking on a movie more information of that movie is shown. This is done by querying for the specific movie ID in the database via the API.
-4. Sorting and filtering - the user can sort all the movies by year, ascending or descending. The user can filter by
-   up to three Genres that are accumulative filtered. All this should work in combination with search as well. 
-   Like the other 
-5. User generated data that is saved to the backend. If a movie is added as a favorite, this choice is saved in the
-   database (Clicking the little heart symbol on the front page will turn it red and save it as a favorite). 
-   The user can add also reviews to every movie which are saved to the database. There is no user-specific functionality 
-   in place so all reviews are anonymous.
-6. Database is hosted on the virtual machine using MongoDB and contains a total of 20 movies.
 
 ## Testing
 
