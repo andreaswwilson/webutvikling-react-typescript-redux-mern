@@ -56,7 +56,6 @@ Router.instance.get('/', async (req: Request, res: Response) => {
 
       query['Genre'] = new RegExp(re, 'i');
     }
-    console.log(sort);
     // Get total count of all the querys we have done
     const totalCount = await DB.Models.Movie.find(query)
       .countDocuments()

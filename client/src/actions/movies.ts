@@ -2,6 +2,8 @@ import axios from 'axios';
 import { MoviesActionTypes } from '.';
 import { Dispatch } from 'redux';
 
+const BASE_URL = 'http://localhost:3000/api/movies';
+
 // Interace of one movie object
 export interface Movie {
   _id: string;
@@ -63,7 +65,7 @@ export interface FetchMoviesProps {
 export const fetchMovies = (props: FetchMoviesProps) => {
   // Fetch all movies that mach with the current query
   const { genre, sortYear, title, limit, page } = props;
-  let url = 'http://localhost:5000/api/movies?';
+  let url = BASE_URL + '?';
 
   // Sice the FetchMoviesProps interface have a lot of optional
   // keys we need to checko what keys are set
@@ -110,7 +112,7 @@ export interface FetchSingleMovieAction {
 export const fetchSingleMovie = (props: FetchMoviesProps) => {
   const { id } = props;
   if (id) {
-    const url = 'http://localhost:5000/api/movies/' + id;
+    const url = BASE_URL + '/' + id;
 
     return async (dispatch: Dispatch) => {
       const response = await axios.get(url);
@@ -145,8 +147,7 @@ export interface UpdateMovieAction {
 // Used for updating a single movie object in the database
 // Done by sending the entire movie object as we would like it as a put request
 export const updateMovie = (movie: Movie) => {
-  const url = 'http://localhost:5000/api/movies/' + movie._id;
-  console.log('URL:' + url);
+  const url = BASE_URL + '/' + movie._id;
   return async (dispatch: Dispatch) => {
     const response = await axios.put(url, movie);
 

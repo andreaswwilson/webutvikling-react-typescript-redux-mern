@@ -48,7 +48,6 @@ Router_1.Router.instance.get('/', (req, res) => __awaiter(void 0, void 0, void 0
             });
             query['Genre'] = new RegExp(re, 'i');
         }
-        console.log(sort);
         const totalCount = yield database_1.DB.Models.Movie.find(query)
             .countDocuments()
             .exec();
