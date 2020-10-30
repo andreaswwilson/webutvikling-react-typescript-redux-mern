@@ -80,12 +80,13 @@ passing states around that are not necassary to keep in a global store.
 For automatic end-2-end testing, we have used the cypress (https://www.cypress.io/) library 
 and made 5 tests that test different functionalities and navigations in the app. 
 
-We have included a jest test for testing an action (SKRIVE MER HER) as a unit test.
-
 We wanted to use the cypress framework cypress-react-unit-test to make unit tests, but we could not make it work as several errors was generated during this. 
-We then tried other alternatives such as ensyme and jest, but it was hard making it work with redux.
+We then tried other alternatives such as ensyme and jest, but it was hard making it work with redux. The different tests we have made with cypress, 
+in our opinion, can be regarded as unit tests since they test do test the functionality of the app. An example would be that the last test successfully enters a review on the movie "Schindler's list"
 
-**RUN TESTS**
+However, we tried implementing a jest test so that we did include an unit test, but this is a very simple one.
+
+**RUN CYPRESS TEST**
 1. Open new terminal in client
 2. Type in npm run e2e
 
@@ -95,8 +96,8 @@ If the above don't work:
 2. Open a terminal in client
 3. Type in npm run e2e
 
-For some reason GitPod and Cypress don't work well together. The second solution is abit more work, but should work. 
-Here is a screenshot taken 30.10.2020 xx:xx:xx, to prove that it works when running it locally:
+For some reason GitPod and Cypress don't work well together. The second solution will work, but requires a bit more work. 
+Here is a screenshot taken 30.10.2020 14:16:38, to prove that it works when running it locally if you don't want to clone the repo:
 
 ![Cypress test](https://gitlab.stud.idi.ntnu.no/it2810-h20/team-32/project-3-it2810-group-32/-/blob/master/Images/Cypress-test.png)
 
