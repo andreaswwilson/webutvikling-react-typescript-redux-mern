@@ -94,17 +94,17 @@ We have also made a link between the commits and the issues by refering to the i
 
 # How to run on gitpod
 
-In gitpod everthing should set up automatically. 
+In gitpod everthing should set up automatically - we have testet it multiple times but it takes a couple of mimutes to build so 
+have some pation. If you need to start the project again go to the root folder and run npm start
+
 Client is running on localhost:3000 and server is running on localhost:5000
 
-If you need to start the project again go to the root folder and run npm start
-
-## To start only server
-cd server 
-npm start
-## To start only client
-cd client
-npm start
+## If gitpod doesnt fix automatically
+Open two terminals
+In terminal 1:
+cd server -> npm install -> npm start
+In terminal 2:
+cd client -> npm install -> npm start
 
 If an error saying "[nodemon] app crashed - waiting for file changes before starting", try starting it again by running npm start
 
