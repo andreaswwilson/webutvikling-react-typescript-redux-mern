@@ -74,12 +74,23 @@ passing states around that are not necassary to keep in a global store.
 
 ## Testing
 
+For automatic end-2-end testing, we have used the cypress (https://www.cypress.io/) library 
+and made 5 relatively easy tests that test different functionalities and navigation in the app. 
+
+The fifth test that checks if a user is able to add a review to a movie will add a new review every time the test is run. 
+It is easy to remove these reviews after being implemented by running the mongodb query "cy.exec('db.movies.update( {Reviews: "This is a test"}, {$unset: {Reviews: ""}})')", 
+but did not manage to implement this when running the test in cypress. Another work-around for deleting an review after each testrun is to add a button to a review 
+which can take a movie-object, remove a comment/review and send it to an existing function called "updateMovie". We did not want to implement this last option
+because we did not want a user to be able to delete another users review. Since we did not implement authorization for this kind of functionality, the result was
+to just have every test add the same review every time it runs.
+
 # Git
 
-We have used git active and making and have used the issues as a todo-list where we have assigned issues to ourself
-and to team-members to keep control of what everyone is doing and what is missing. We have used branches as much as
-possible to indicate what the code we have commited is related to. We have also made a link between the commits and
-the issues by refering to the issue by #<number>.
+We have used git active and have used issues as a todo-list where we have assigned issues to ourself
+and to team-members. This is to keep control of what everyone is doing and what is missing. We have used branches to ensure that the code which are implemented
+is thoroughly tested and working, before merging it to the master branch. By doing this the latest version, the master branch, always functions. 
+We have also made a link between the commits and the issues by refering to the issue by #<number>.
+
 
 # How to run on gitpod
 
