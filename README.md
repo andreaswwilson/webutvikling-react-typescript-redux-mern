@@ -78,9 +78,27 @@ passing states around that are not necassary to keep in a global store.
 ## Testing
 
 For automatic end-2-end testing, we have used the cypress (https://www.cypress.io/) library 
-and made 5 tests that test different functionality and navigation in the app. 
+and made 5 tests that test different functionalities and navigations in the app. 
 
-You can run these tests by typing "npm e2e" while in the "./client" folder, and then clicking on the thing that shows up?????? UFERDIG
+We have included a jest test for testing an action (SKRIVE MER HER) as a unit test.
+
+We wanted to use the cypress framework cypress-react-unit-test to make unit tests, but we could not make it work as several errors was generated during this. 
+We then tried other alternatives such as ensyme and jest, but it was hard making it work with redux.
+
+**RUN TESTS**
+1. Open new terminal in client
+2. Type in npm run e2e
+
+If the above don't work:
+
+1. Clone the repo
+2. Open a terminal in client
+3. Type in npm run e2e
+
+For some reason GitPod and Cypress don't work well together. The second solution is abit more work, but should work. 
+Here is a screenshot taken 30.10.2020 xx:xx:xx, to prove that it works when running it locally:
+
+
 
 The fifth test that checks if a user is able to add a review to a movie will add a new review every time the test is run. 
 It is easy to remove these reviews after being implemented by running the mongodb query "cy.exec('db.movies.update( {Reviews: "This is a test"}, {$unset: {Reviews: ""}})')", 
