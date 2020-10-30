@@ -138,6 +138,12 @@ to just have every test add the same review every time it runs.
 
 If you want to inspect the code, these tests are placed under client/cypress/integration/sample.spec.js.
 
+We also attempted to make both Snapshot tests and Unit tests using the Enzyme library, as well as react-redux in order to test with our existing framework. 
+Enzyme would primarily have allowed us to create "shallow" tests, where for example a snapshot would not need access to the entire tree to pass the test.
+We also tried using redux-mock-store, which would have allowed us to create a mock store to use with our connected components to create unit tests. 
+We did however not manage to use these frameworks in a good enough way, so we ended up dropping this idea. using react-redux would also have allowed us
+to test specific Redux components like action or reducers.
+
 # Git
 
 We have used git actively and have used issues as a todo-list where we have assigned issues to ourselves
