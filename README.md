@@ -103,7 +103,7 @@ For automatic end-2-end testing, we have used the cypress (https://www.cypress.i
 and made 5 tests that test different functionalities and navigation in the app.
 
 We wanted to use the cypress framework cypress-react-unit-test to make unit tests, but we could not make it work as several errors was generated during this.
-We then tried other alternatives such as ensyme and jest, but it was hard making it work with redux. The different tests we have made with cypress,
+We then tried other alternatives such as ensyme and jest, but it was hard making it work with typescript. The different tests we have made with cypress,
 in our opinion, can be regarded as unit tests since they test do test the functionality of the app. An example would be that the last test successfully enters a review on the movie "Schindler's list"
 
 However, we tried implementing a jest test so that we did include an unit test, but this is a very simple one.
@@ -111,13 +111,13 @@ However, we tried implementing a jest test so that we did include an unit test, 
 **RUN CYPRESS TEST**
 
 1. Open new terminal in client
-2. Type in npm run e2e
+2. Type  "npm run e2e"
 
 If the above don't work:
 
 1. Clone the repo
 2. Open a terminal in client
-3. Type in npm run e2e
+3. Type "npm run e2e"
 
 For some reason GitPod and Cypress don't work well together. The second solution will work, but requires a bit more work.
 Here is a screenshot taken 30.10.2020 14:16:38, to prove that it works when running it locally if you don't want to clone the repo:
