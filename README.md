@@ -59,23 +59,28 @@ of all movies we currently are showing the user.
 For states limited to local files we have used react hooks to simplifiy the program and to avoid
 passing states around that are not necassary to keep in a global store.
 
-## Content and functionallity
+## Content and functionality
 
-1. Search - the user can filter based on a search done by title. The search is querying the backend and the backend
-   returns the hits.
-2. Presentation of movies with pagination to prepare for handeling of big result of data. This is done in the front end
-   for us since.
-3. By clicking on the movie more information of that movie is shown.
+1. Search - the user can do a search on movie titles. The search will query the backend via the API and the backend
+   returns the matches.
+2. Presentation of movies with pagination to prepare for handling of a large dataset and increase readability for the user. 
+   This is also done by using the API and the back-end. 
+3. By clicking on a movie more information of that movie is shown. This is done by querying for the specific movie ID in the database via the API.
 4. Sorting and filtering - the user can sort all the movies by year, ascending or descending. The user can filter by
-   up to three Genres that are accumulative filtered.
-5. User generated data that is save to the backend. If a movie is added as a favorite, this choice is saved in the
-   database. The user can add reviews to every movie which are saved to the database.
-6. Database is hosted on the virtual machine and loaded with 20 movies.
+   up to three Genres that are accumulative filtered. All this should work in combination with search as well. 
+   Like the other 
+5. User generated data that is saved to the backend. If a movie is added as a favorite, this choice is saved in the
+   database (Clicking the little heart symbol on the front page will turn it red and save it as a favorite). 
+   The user can add also reviews to every movie which are saved to the database. There is no user-specific functionality 
+   in place so all reviews are anonymous.
+6. Database is hosted on the virtual machine using MongoDB and contains a total of 20 movies.
 
 ## Testing
 
 For automatic end-2-end testing, we have used the cypress (https://www.cypress.io/) library 
-and made 5 relatively easy tests that test different functionalities and navigation in the app. 
+and made 5 tests that test different functionality and navigation in the app. 
+
+You can run these tests by typing "npm e2e" while in the "./client" folder, and then clicking on the thing that shows up?????? UFERDIG
 
 The fifth test that checks if a user is able to add a review to a movie will add a new review every time the test is run. 
 It is easy to remove these reviews after being implemented by running the mongodb query "cy.exec('db.movies.update( {Reviews: "This is a test"}, {$unset: {Reviews: ""}})')", 
@@ -86,10 +91,11 @@ to just have every test add the same review every time it runs.
 
 # Git
 
-We have used git active and have used issues as a todo-list where we have assigned issues to ourself
-and to team-members. This is to keep control of what everyone is doing and what is missing. We have used branches to ensure that the code which are implemented
-is thoroughly tested and working, before merging it to the master branch. By doing this the latest version, the master branch, always functions. 
-We have also made a link between the commits and the issues by refering to the issue by #<number>.
+We have used git actively and have used issues as a todo-list where we have assigned issues to ourselves
+and to team-members. This is to keep control of what everyone is doing and what is missing. We have used branches to ensure that the code which is implemented
+is thoroughly tested and working, before merging it to the master branch. By doing this the latest version (the master branch) will always function. 
+We have also made a link between the commits and the issues by refering to the issue by #<number>. In hindsight we realised that we could have used issues more frequently
+and for smaller things that needed fixing, but it still worked well for our use case.
 
 
 # How to run on gitpod
