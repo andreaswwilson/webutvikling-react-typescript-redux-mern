@@ -153,6 +153,7 @@ export const _App: React.FC<Props> = ({
         {movieState.isLoading && (
           <Col xs='1'>
             <Spinner color='primary' /> Loading
+            <h1>Are you connect to NTNU network?</h1>
           </Col>
         )}
         {/* Render all the movies in the state */}
