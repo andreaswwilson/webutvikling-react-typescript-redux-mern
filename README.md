@@ -108,6 +108,8 @@ which takes a movie-object, remove a comment/review and send it to an existing f
 because we did not want a user to be able to delete another users review. Since we did not implement authorization for this kind of functionality, the result was
 to just have every test add the same review every time it runs.
 
+If you want to inspect the code, these tests are placed under client/cypress/integration/sample.spec.js.
+
 # Git
 
 We have used git actively and have used issues as a todo-list where we have assigned issues to ourselves
