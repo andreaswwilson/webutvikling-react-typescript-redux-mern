@@ -8,8 +8,6 @@ import {
   FetchSingleMovieAction,
 } from './movies';
 
-import { SetPageAction, NextPageAction, PrevPageAction } from './pages';
-
 export enum MoviesActionTypes {
   fetchMovies = 'FETCH_MOVIES',
   fetchSingleMovie = 'FETCH_SINGLE_MOVIE',
@@ -28,11 +26,3 @@ export type MoviesAction =
   | SortByYearMovieAction
   | UpdateQueryAction
   | FetchSingleMovieAction;
-
-export enum PageActionTypes {
-  setPage = 'SET_PAGE',
-  nextPage = 'NEXT_PAGE',
-  prevPage = 'PREV_PAGE',
-}
-
-export type PageAction = SetPageAction | NextPageAction | PrevPageAction;

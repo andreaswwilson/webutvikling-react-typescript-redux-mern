@@ -4,10 +4,6 @@ import {
   fetchMovies,
   toggleFavoriteMovie,
   updateMovie,
-  Page,
-  prevPage,
-  nextPage,
-  sortByYear,
   MovieState,
   updateQuery,
 } from '../actions';
@@ -37,10 +33,6 @@ interface Props {
   updateMovie: any;
   toggleFavoriteMovie: typeof toggleFavoriteMovie;
   updateQuery: typeof updateQuery;
-  page: Page;
-  nextPage: typeof nextPage;
-  prevPage: typeof prevPage;
-  sortByYear: typeof sortByYear;
 }
 
 export const _App: React.FC<Props> = ({
@@ -159,21 +151,19 @@ export const _App: React.FC<Props> = ({
         moviesPerPage={movieState.query.limit || 4}
         totalMovies={movieState.totalCount}
         updateQuery={updateQuery}
+        movieState={movieState}
       />
     </Container>
   );
 };
 
-const mapStateToProps = ({ movieState, page }: StoreState) => {
-  return { movieState, page };
+const mapStateToProps = ({ movieState }: StoreState) => {
+  return { movieState };
 };
 
 export const App = connect(mapStateToProps, {
   fetchMovies,
   updateMovie,
-  nextPage,
-  prevPage,
   toggleFavoriteMovie,
-  sortByYear,
   updateQuery,
 })(_App);
