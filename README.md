@@ -125,10 +125,10 @@ Client is running on localhost:3000 and server is running on localhost:5000
 
 ## If gitpod doesnt fix automatically
 Open two terminals
-In terminal 1:
-cd server -> npm install -> npm start
-In terminal 2:
-cd client -> npm install -> npm start
+1. In terminal 1:
+    cd server -> npm install -> npm start
+2. In terminal 2:
+    cd client -> npm install -> npm start
 
 If an error saying "[nodemon] app crashed - waiting for file changes before starting", try starting it again by running npm start
 
