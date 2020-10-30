@@ -2,34 +2,16 @@
 
 # Project 3 - IT2810 Group 32
 
-# How to run on gitpod
-
-In gitpod everthing should set up automatically - we have tested it multiple times but it takes a couple of minutes to build so
-have some patience. If you need to start the project again go to the root folder and run npm start
-
-Client is running on localhost:3001 and server is running on localhost:3000
-
-Open the page by going to "open port" and select "open browser"
-![Open browser](Images/openbrower.png)
-
-## If gitpod doesn't start automatically
-
-Open two terminals
-
-1. In terminal 1:
-   cd server -> npm install -> npm start
-2. In terminal 2:
-   cd client -> npm install -> npm start
-
-If an error saying "[nodemon] app crashed - waiting for file changes before starting", try starting it again by running npm start
-
 # How to run locally
 
 From root folder run
 
-1. npm install
-2. npm run installscript
-3. npm start
+1. Connect to NTNU network
+2. npm install
+3. npm run installscript
+4. npm start
+
+Client is running on localhost:3001 and server is running on localhost:3000
 
 If that doesn't work
 Open two terminals
@@ -38,6 +20,19 @@ Open two terminals
    cd server -> npm install -> npm start
 2. In terminal 2:
    cd client -> npm install -> npm star
+
+# How to run on gitpod
+
+In gitpod everthing should set up automatically - but there are some issues with ports and access so it is better to clone and run locally. If you need to start the project again go to the root folder and run npm start
+
+Client is running on localhost:3001 and server is running on localhost:3000
+
+Open the page by going to "open port" and select "open browser"
+![Open browser](Images/openbrower.png)
+
+## If gitpod doesn't start automatically
+
+Clone and run locally.
 
 # Overview
 
