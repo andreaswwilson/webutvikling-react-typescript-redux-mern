@@ -1,3 +1,6 @@
+[![Gitpod Ready-to-Code](https://img.shields.io/badge/Gitpod-Ready--to--Code-blue?logo=gitpod)](https://gitpod.idi.ntnu.no/#https://https://gitlab.stud.idi.ntnu.no/it2810-h20/team-32/project-3-it2810-group-32) 
+
+
 # Project 3 - IT2810 Group 32
 
 # Overview
@@ -15,11 +18,17 @@ functions
 ### Get requests
 
 1. /api/movies/<id> => return a single movie if the id exist, else an error.
-2. /api/movies/page/:page => return X numbers of movies. Hardcoded to 4 movies
-   returned. To be used for backend pagination.
-3. /api/movies/title/<title> => returns all movies with a parial match on a movie query
-   using regex to match.
-4. /api/movies => returns all movies in database
+2. /api/movies 
+    If no options are added returns a json object with key totalCount and data-array
+    where the movies objects are in the data-array
+    Options can be added using regular syntax, ie /api/movies?title=Tenet&sortByYear=ascending
+    Available options:
+        title - filter title by partial match ignoring case
+        year - filter year by partial match ignoring case
+        sortByYear - can either be sortByYear=descending or ascending. Sorts by year
+        genre - input as an array, ie ?genre[]=action&genre[]=drama - filter by all categories
+        page - what page to show
+        limit - how many results to return
 
 ### Put requests
 
