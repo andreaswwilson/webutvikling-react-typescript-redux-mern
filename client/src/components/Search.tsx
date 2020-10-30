@@ -10,7 +10,7 @@ const Search: FC = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(updateQuery({ title: search }));
+    dispatch(updateQuery({ title: search, page: 1 }));
   }, [search]);
 
   const submitHandler = (e: FormEvent<HTMLFormElement>) => {

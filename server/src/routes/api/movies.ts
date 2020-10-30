@@ -17,41 +17,10 @@ Router.instance.get('/:id', async (req: Request, res: Response) => {
   }
 });
 
-Router.instance.get('/page/:page', async (req: Request, res: Response) => {
-  try {
-    const movies = await DB.Models.Movie.find();
-    const page = parseInt(req.params.page);
-    const perPage = 4;
-    const skipped = (page - 1) * perPage;
-    if (!movies) throw Error('No record found');
-    const paginatedMovies = movies.slice(skipped, skipped + perPage);
-    res.status(200).json(paginatedMovies);
-  } catch (error) {
-    res.status(400).json({ id: req.params.id, msg: error.message });
-  }
-});
-
-/**
- * @route Get api/movies/title/:title
- * @desc get movie by a partial title. case-insensitive
- * @access Public
- */
-
-Router.instance.get('/title/:title', async (req: Request, res: Response) => {
-  try {
-    const movie = await DB.Models.Movie.find({
-      Title: { $regex: req.params.title, $options: 'i' }, // option i = case insensitive
-    });
-    if (!movie) throw Error('No record found');
-    res.status(200).json(movie);
-  } catch (error) {
-    res.status(400).json({ year: req.params.title, msg: error.message });
-  }
-});
-
 /**
  * @route   GET api/movies
- * @desc    Get all movies
+ * @desc    Get a page of movies based on search criterias,
+ *          filter on category and/or sorted by year
  * @access  Public
  */
 Router.instance.get('/', async (req: Request, res: Response) => {
@@ -65,6 +34,16 @@ Router.instance.get('/', async (req: Request, res: Response) => {
     if (req.query.year) {
       query['Year'] = new RegExp(req.query.year as string, 'i');
     }
+    let sort = {};
+    if (req.query.sortByYear) {
+      // Oldest year first
+      if (req.query.sortByYear === 'ascending') {
+        sort = { Year: 1 };
+      }
+      if (req.query.sortByYear === 'descending') {
+        sort = { Year: -1 };
+      }
+    }
 
     // Create regex for genre. Using lookahead assertion
     // to match all genres in any order.
@@ -77,7 +56,7 @@ Router.instance.get('/', async (req: Request, res: Response) => {
 
       query['Genre'] = new RegExp(re, 'i');
     }
-
+    console.log(sort);
     // Get total count of all the querys we have done
     const totalCount = await DB.Models.Movie.find(query)
       .countDocuments()
@@ -97,6 +76,7 @@ Router.instance.get('/', async (req: Request, res: Response) => {
     const movies = await DB.Models.Movie.find(query)
       .limit(limit)
       .skip(startIndex)
+      .sort(sort)
       .exec();
 
     if (!movies) throw Error('No items');

@@ -1,0 +1,7 @@
+# get http://localhost:5000/api/movies?genre[]=drama&title=days
+# get http://localhost:5000/api/movies?page=2&?limit=1
+
+get http://localhost:5000/api/movies?sortByYear=descending
+
+# get http://localhost:5000/api/movies?&genre[]=romance&genre[]=drama
+

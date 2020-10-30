@@ -48,10 +48,6 @@ export const _App: React.FC<Props> = ({
   fetchMovies,
   updateMovie,
   toggleFavoriteMovie,
-  page,
-  prevPage,
-  nextPage,
-  sortByYear,
   updateQuery,
 }): JSX.Element => {
   useEffect(() => {
@@ -77,17 +73,6 @@ export const _App: React.FC<Props> = ({
     updateQuery({ genre: checkBoxFilter });
   }, [checkBoxFilter]);
 
-  //states for keeping track of page number
-  const [currentPage, setCurrentPage] = useState(1);
-  const [moviesPerPage, setMoviesPerPage] = useState(4);
-
-  //calculate
-  const indexOfLastMovie = currentPage * moviesPerPage;
-  const indexOfFirstMovie = indexOfLastMovie - moviesPerPage;
-
-  //function for switching pageNumber
-  const paginate = (pageNumber: number) => setCurrentPage(pageNumber);
-
   const renderMovies = () => {
     return movieState.movies.map((movie: Movie) => {
       return (
@@ -100,6 +85,7 @@ export const _App: React.FC<Props> = ({
       );
     });
   };
+  console.log('App.txt: ', movieState.query);
   return (
     <Container>
       <Search />
@@ -110,14 +96,14 @@ export const _App: React.FC<Props> = ({
             <DropdownMenu>
               <DropdownItem
                 onClick={() => {
-                  sortByYear(true);
+                  updateQuery({ sortYear: 'ascending' });
                 }}
               >
                 Sort by year ascending
               </DropdownItem>
               <DropdownItem
                 onClick={() => {
-                  sortByYear(false);
+                  updateQuery({ sortYear: 'descending' });
                 }}
               >
                 Sort by year descending

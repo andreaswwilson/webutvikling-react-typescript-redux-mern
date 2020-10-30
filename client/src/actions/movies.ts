@@ -33,6 +33,7 @@ export interface Movie {
 
 export interface MovieState {
   movies: Movie[];
+  movie?: Movie;
   isLoading: boolean;
   totalCount: number;
   query: FetchMoviesProps;
@@ -40,34 +41,33 @@ export interface MovieState {
 
 export interface FetchMoviesAction {
   type: MoviesActionTypes.fetchMovies;
-  payload: { totalCount: number; movies: Movie[]; query: FetchMoviesProps };
+  payload: {
+    totalCount: number;
+    movies: Movie[];
+    query: FetchMoviesProps;
+  };
 }
 
 export interface FetchMoviesProps {
   id?: string;
   genre?: string[];
-  sort?: string;
+  sortYear?: string;
   title?: string;
   limit?: number;
   page?: number;
 }
 
 export const fetchMovies = (props: FetchMoviesProps) => {
-  const { id, genre, sort, title, limit, page } = props;
-  let url = 'http://localhost:5000/api/movies';
-  if (typeof id === 'string') {
-    url += ('/' + id) as string;
-  } else {
-    url += '?';
-  }
+  const { genre, sortYear, title, limit, page } = props;
+  let url = 'http://localhost:5000/api/movies?';
 
   if (genre) {
     genre.forEach((g) => {
       url += '&genre[]=' + g;
     });
   }
-  if (sort) {
-    url += '&sort=' + sort;
+  if (sortYear) {
+    url += '&sortByYear=' + sortYear;
   }
   if (title) {
     url += '&title=' + title;
@@ -78,7 +78,7 @@ export const fetchMovies = (props: FetchMoviesProps) => {
   if (page) {
     url += '&page=' + page;
   }
-  // console.log('FetchMovies url:', url);
+  console.log('FetchMovies url:', url);
 
   return async (dispatch: Dispatch) => {
     const response = await axios.get(url);
@@ -93,7 +93,29 @@ export const fetchMovies = (props: FetchMoviesProps) => {
     });
   };
 };
+export interface FetchSingleMovieAction {
+  type: MoviesActionTypes.fetchSingleMovie;
+  payload: {
+    movie: Movie;
+  };
+}
+export const fetchSigleMovie = (props: FetchMoviesProps) => {
+  const { id } = props;
+  if (id) {
+    const url = 'http://localhost:5000/api/movies/' + id;
 
+    return async (dispatch: Dispatch) => {
+      const response = await axios.get(url);
+
+      dispatch<FetchSingleMovieAction>({
+        type: MoviesActionTypes.fetchSingleMovie,
+        payload: {
+          movie: response.data.data[0],
+        },
+      });
+    };
+  }
+};
 export interface DeleteMovieAction {
   type: MoviesActionTypes.deleteMovie;
   payload: string;

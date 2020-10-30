@@ -5,12 +5,14 @@ import {
   UpdateMovieAction,
   SortByYearMovieAction,
   UpdateQueryAction,
+  FetchSingleMovieAction,
 } from './movies';
 
 import { SetPageAction, NextPageAction, PrevPageAction } from './pages';
 
 export enum MoviesActionTypes {
   fetchMovies = 'FETCH_MOVIES',
+  fetchSingleMovie = 'FETCH_SINGLE_MOVIE',
   deleteMovie = 'DELETE_MOVIE',
   toggleFavorite = 'TOGGLE_FAVORITE',
   updateMovie = 'UPDATE_MOVIE',
@@ -24,7 +26,8 @@ export type MoviesAction =
   | ToggleFavoriteMovieAction
   | UpdateMovieAction
   | SortByYearMovieAction
-  | UpdateQueryAction;
+  | UpdateQueryAction
+  | FetchSingleMovieAction;
 
 export enum PageActionTypes {
   setPage = 'SET_PAGE',

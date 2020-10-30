@@ -13,8 +13,9 @@ export const moviesReducer = (
   action: MoviesAction,
 ) => {
   switch (action.type) {
-    // If we are fetching all movies just return all
     case MoviesActionTypes.fetchMovies:
+      // Fetch all movies with the given query. Return the total movies fount
+      // and all the movies returnes by the DB.
       return {
         ...state,
         isLoading: false,
@@ -22,7 +23,16 @@ export const moviesReducer = (
         totalCount: action.payload.totalCount,
       };
 
+    case MoviesActionTypes.fetchSingleMovie:
+      // Fetch all movies with the given query. Return the total movies fount
+      // and all the movies returnes by the DB.
+      return {
+        ...state,
+        movie: action.payload.movie,
+      };
+
     case MoviesActionTypes.toggleFavorite:
+      // Change the state of a move to be a favorite.
       return {
         ...state,
         movies: state.movies.map((movie: Movie) => {
@@ -38,31 +48,18 @@ export const moviesReducer = (
           };
         }),
       };
+
     case MoviesActionTypes.updateMovie:
+      // This is used to updata a movie in the DB, so the state is not changed.
       return state;
+
     case MoviesActionTypes.updateQuery:
+      // Update the query we are sending to the backend for filtering, searching
+      // and sorting
+
       // Using {...state.query} to make a copy since object.assign mutates data which is no-no in redux
       const updatedQuery = Object.assign({ ...state.query }, action.payload);
-
-      // return { ...state, query: action.payload };
       return { ...state, query: updatedQuery };
-
-    case MoviesActionTypes.sortByYear:
-      if (action.payload) {
-        return {
-          ...state,
-          movies: state.movies
-            .slice()
-            .sort((a, b) => (a.Year > b.Year ? 1 : -1)),
-        };
-      } else {
-        return {
-          ...state,
-          movies: state.movies
-            .slice()
-            .sort((a, b) => (a.Year > b.Year ? -1 : 1)),
-        };
-      }
 
     default:
       return state;
