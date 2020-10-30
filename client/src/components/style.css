@@ -65,3 +65,27 @@ b {
   }
 
 }
+
+.pagination{
+  list-style-type:none;
+  display:flex;
+  justify-content: center;
+}
+.pagination.page-item{
+  display: list-item;
+  background: black;
+  width: 25%;
+  color:black;
+  margin: 0 15px;
+}
+
+.page-link {
+  color: black;
+  background: rgb(104, 90, 90);
+}
+
+.sort-dropdown {
+  display:flex;
+  justify-content: center;
+  margin: 20px;
+}

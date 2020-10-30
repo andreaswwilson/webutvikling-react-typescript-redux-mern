@@ -1,47 +1,48 @@
-import React, { FC, FormEvent, useState } from 'react';
+import React, { FC, FormEvent, useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
-import {  Form, Button, FormGroup, Input, Container, Row  } from 'reactstrap';
 
-import { SearchMovie, fetchMovies } from '../actions/movies'
+import { Form, FormGroup, Input, Container, Row } from 'reactstrap';
 
+import { fetchMovies } from '../actions/movies'
+
+
+
+
+import { updateQuery } from '../actions/movies';
 
 const Search: FC = () => {
-    const [search, setSearch] = useState("");   
-    const dispatch = useDispatch();
+  // Handle local state for search bar input
+  const [search, setSearch] = useState('');
+  const dispatch = useDispatch();
 
-    const changeHandler = (e: FormEvent<HTMLInputElement>) => {
-        //Saves the search value in search
-        setSearch(e.currentTarget.value);
-        //Dynamic search while typing in the title of the film
-        dispatch(SearchMovie(search))
-    
-        if(e.currentTarget.value == '') {
-            dispatch(fetchMovies())
-        }
-    }
+  useEffect(() => {
+    dispatch(updateQuery({ title: search }));
+  }, [search]);
 
-    const submitHandler = (e: FormEvent<HTMLFormElement>) => {
-        //Prevents auto refresh when submitting the form
-        e.preventDefault();
-        dispatch(SearchMovie(search))
-    }
+  const submitHandler = (e: FormEvent<HTMLFormElement>) => {
+    //Prevents auto refresh when submitting the form
+    e.preventDefault();
+  };
 
-    return (
-        <Container>
-            <Row>
-                <Form className="search-form" onSubmit={submitHandler} >
-                    <FormGroup>
-                        <Input 
-                            type="text" 
-                            className="input has-text-centered" 
-                            value={search} 
-                            placeholder="Search for a movie" onChange={changeHandler}> 
-                        </Input>
-                    </FormGroup>            
-                </Form>
-            </Row>
-        </Container>
-    );
-}
+  return (
+    <Container>
+      <Row>
+        <Form className='search-form' onSubmit={submitHandler}>
+          <FormGroup>
+            <Input
+              type='text'
+              className='input has-text-centered'
+              value={search}
+              placeholder='Search for a movie'
+              onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+                setSearch(event.target.value);
+              }}
+            ></Input>
+          </FormGroup>
+        </Form>
+      </Row>
+    </Container>
+  );
+};
 
 export default Search;

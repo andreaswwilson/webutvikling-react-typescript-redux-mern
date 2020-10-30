@@ -31,19 +31,65 @@ export interface Movie {
   Reviews?: string[];
 }
 
-export interface FetchMoviesAction {
-  type: MoviesActionTypes.fetchMovies;
-  payload: Movie[];
+export interface MovieState {
+  movies: Movie[];
+  isLoading: boolean;
+  totalCount: number;
+  query: FetchMoviesProps;
 }
 
-export const fetchMovies = () => {
-  const url = 'http://localhost:5000/api/movies';
+export interface FetchMoviesAction {
+  type: MoviesActionTypes.fetchMovies;
+  payload: { totalCount: number; movies: Movie[]; query: FetchMoviesProps };
+}
+
+export interface FetchMoviesProps {
+  id?: string;
+  genre?: string[];
+  sort?: string;
+  title?: string;
+  limit?: number;
+  page?: number;
+}
+
+export const fetchMovies = (props: FetchMoviesProps) => {
+  const { id, genre, sort, title, limit, page } = props;
+  let url = 'http://localhost:5000/api/movies';
+  if (typeof id === 'string') {
+    url += ('/' + id) as string;
+  } else {
+    url += '?';
+  }
+
+  if (genre) {
+    genre.forEach((g) => {
+      url += '&genre[]=' + g;
+    });
+  }
+  if (sort) {
+    url += '&sort=' + sort;
+  }
+  if (title) {
+    url += '&title=' + title;
+  }
+  if (limit) {
+    url += '&limit=' + limit;
+  }
+  if (page) {
+    url += '&page=' + page;
+  }
+  // console.log('FetchMovies url:', url);
+
   return async (dispatch: Dispatch) => {
     const response = await axios.get(url);
 
     dispatch<FetchMoviesAction>({
       type: MoviesActionTypes.fetchMovies,
-      payload: response.data,
+      payload: {
+        totalCount: response.data.totalCount,
+        movies: response.data.data,
+        query: props,
+      },
     });
   };
 };
@@ -83,24 +129,6 @@ export const sortByYear = (reversed: boolean): SortByYearMovieAction => {
     payload: reversed,
   };
 };
-export interface SearchMoviesAction {
-  type: MoviesActionTypes.searchMovies;
-  payload: Movie[];
-}
-
-//dispatching the action type and payload which will make the reducer recognize the actions
-export const SearchMovie = (title: string) => {
-  const url = 'http://localhost:5000/api/movies/title/' + title;
-
-  return async (dispatch: Dispatch) => {
-    const response = await axios.get(url);
-
-    dispatch<SearchMoviesAction>({
-      type: MoviesActionTypes.searchMovies,
-      payload: response.data,
-    });
-  };
-};
 
 export interface UpdateMovieAction {
   type: MoviesActionTypes.updateMovie;
@@ -117,5 +145,17 @@ export const updateMovie = (movie: Movie) => {
       type: MoviesActionTypes.updateMovie,
       payload: response.data,
     });
+  };
+};
+
+export interface UpdateQueryAction {
+  type: MoviesActionTypes.updateQuery;
+  payload: FetchMoviesProps;
+}
+
+export const updateQuery = (props: FetchMoviesProps): UpdateQueryAction => {
+  return {
+    type: MoviesActionTypes.updateQuery,
+    payload: props,
   };
 };
