@@ -88,5 +88,12 @@ Client is running on localhost:3000 and server is running on localhost:5000
 
 If you need to start the project again go to the root folder and run npm start
 
+## To start only server
+cd server 
+npm start
+## To start only client
+cd client
+npm start
+
 If an error saying "[nodemon] app crashed - waiting for file changes before starting", try starting it again by running npm start
 
