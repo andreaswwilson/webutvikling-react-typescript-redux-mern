@@ -81,34 +81,12 @@ and to team-members to keep control of what everyone is doing and what is missin
 possible to indicate what the code we have commited is related to. We have also made a link between the commits and
 the issues by refering to the issue by #<number>.
 
-HOW-TO: client
+# How to run on gitpod
 
-1. Navigate to the "project-3-it2810-group-32/client" folder
-2. npm install
-3. npm start
+In gitpod everthing should set up automatically. 
+Client is running on localhost:3000 and server is running on localhost:5000
 
-HOW-TO: server
+If you need to start the project again go to the root folder and run npm start
 
-1. Navigate to the "project-3-it2810-group-32/server" folder
-2. Enter "npm install"
-3. Enter "npm start"
+If an error saying "[nodemon] app crashed - waiting for file changes before starting", try starting it again by running npm start
 
-This will start the database server on localhost:5000
-
-If an error saying "[nodemon] app crashed - waiting for file changes before starting", try:
-
-MAC: (In server folder)
-
-1. npm install typescript
-2. Type in "npm start"
-
-Windows: (In server folder)
-
-1. tsc -w
-2. Enter "npm start"
-
-If you get an error (on Windows) saying:
-
-_"src/server.ts(6,18): error TS7016: Could not find a declaration file for module 'cors'.":_
-
-Just CTRL-C to cancel the command and type: **npm install @types/cors.** After this it should work
