@@ -112,6 +112,7 @@ However, we tried implementing a jest test so that we did include an unit test, 
 
 1. Open new terminal in client
 2. Type  "npm run e2e"
+3. A cypres window opens. Click on "Run all specs" to run tests.
 
 If the above don't work:
 
