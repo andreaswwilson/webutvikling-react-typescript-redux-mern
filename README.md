@@ -108,18 +108,21 @@ We wanted to use the cypress framework cypress-react-unit-test to make unit test
 We then tried other alternatives such as ensyme and jest, but it was hard making it work with typescript. The different tests we have made with cypress,
 in our opinion, can be regarded as unit tests since they test do test the functionality of the app. An example would be that the last test successfully enters a review on the movie "Schindler's list"
 
-However, we tried implementing a jest test so that we did include an unit test, but this is a very simple one.
 
 **RUN CYPRESS TEST**
 
 1. Open new terminal in client
 2. Type  "npm run e2e"
+3. A window with cypress should open up
+4. press "run all tests" in upright corner
 
 If the above don't work:
 
 1. Clone the repo
 2. Open a terminal in client
 3. Type "npm run e2e"
+4. 3. A window with cypress should open up
+5. press "run all tests" in upright corner
 
 For some reason GitPod and Cypress don't work well together. The second solution will work, but requires a bit more work.
 Here is a screenshot taken 30.10.2020 14:16:38, to prove that it works when running it locally if you don't want to clone the repo:
