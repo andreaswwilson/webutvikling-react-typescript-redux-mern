@@ -7,7 +7,7 @@
 In gitpod everthing should set up automatically - we have tested it multiple times but it takes a couple of minutes to build so
 have some patience. If you need to start the project again go to the root folder and run npm start
 
-Client is running on localhost:3000 and server is running on localhost:5000
+Client is running on localhost:3001 and server is running on localhost:3000
 
 Open the page by going to "open port" and select "open browser"
 ![Open browser](Images/openbrower.png)
@@ -22,6 +22,22 @@ Open two terminals
    cd client -> npm install -> npm start
 
 If an error saying "[nodemon] app crashed - waiting for file changes before starting", try starting it again by running npm start
+
+# How to run locally
+
+From root folder run
+
+1. npm install
+2. npm run installscript
+3. npm start
+
+If that doesn't work
+Open two terminals
+
+1. In terminal 1:
+   cd server -> npm install -> npm start
+2. In terminal 2:
+   cd client -> npm install -> npm star
 
 # Overview
 
