@@ -5,20 +5,21 @@
 
 # Overview
 
-This project consists of a server part and a client part
-
+This project consists of a client part and a server part
 
 
 # Client
 
+## Technologies
+
 The client is build on typescript, redux, bootstrap/reactstrap, react-router and axios.
+
 
 ## State management
 
 State management is done by usage of both redux and react hooks.
 Redux is used for handeling the state of movies and pagination. For movies the states that are handled are an array
-of all movies we currently are showing the user, one movie object for rendering a movie page, isLoading, the 
-current query based on an accumulation of serach, filter and sort and the total count of hits from the api for the current query.
+of all movies we currently are showing the user.
 
 For states limited to local files we have used react hooks to simplifiy the program and to avoid
 passing states around that are not necassary to keep in a global store.
@@ -105,10 +106,10 @@ Here is a screenshot taken 30.10.2020 14:16:38, to prove that it works when runn
 
 ![Cypress test](https://gitlab.stud.idi.ntnu.no/it2810-h20/team-32/project-3-it2810-group-32/-/blob/master/Images/Cypress-test.png)
 
-The fifth test that checks if a user is able to add a review to a movie will add a new review every time the test is run. 
+The fifth test checks if a user is able to add a review to a movie, but this will add a new review every time the test is run. 
 It is easy to remove these reviews after being implemented by running the mongodb query "cy.exec('db.movies.update( {Reviews: "This is a test"}, {$unset: {Reviews: ""}})')", 
-but did not manage to implement this when running the test in cypress. Another work-around for deleting an review after each testrun is to add a button to a review 
-which can take a movie-object, remove a comment/review and send it to an existing function called "updateMovie". We did not want to implement this last option
+but we wasn't able to implement this when running the test in cypress. Another work-around for deleting an review after each testrun is to add a button to a review 
+which takes a movie-object, remove a comment/review and send it to an existing function called "updateMovie". We decided to not implement this last option
 because we did not want a user to be able to delete another users review. Since we did not implement authorization for this kind of functionality, the result was
 to just have every test add the same review every time it runs.
 
