@@ -4,9 +4,10 @@
 
 # How to run locally
 
-1. Connect to NTNU network
+1. Connect to NTNU network (if you aren't there physically, use a VPN. Instructions: https://innsida.ntnu.no/wiki/-/wiki/English/Install+VPN)
 2. Open two terminals
-3. In terminal 1:
+3. Navigate to the "project-3-it2810-group-32" folder.
+4. 3. In terminal 1:
    cd server -> npm install -> npm start
 4. In terminal 2:
    cd client -> npm install -> npm start
@@ -17,7 +18,8 @@ Client is running on localhost:3000 and server is running on localhost:5000
 
 # How to run on gitpod
 
-In gitpod everthing should set up automatically - but there are some issues with ports and access so it is better to clone and run locally. If you need to start the project again go to the root folder and run npm start
+In gitpod everthing should set up automatically - but there are some issues with ports and access so it is better to clone and run locally. 
+If you need to start the project again go to the root folder and run npm start
 
 Client is running on localhost:3000 and server is running on localhost:5000
 
@@ -112,7 +114,6 @@ However, we tried implementing a jest test so that we did include an unit test, 
 
 1. Open new terminal in client
 2. Type  "npm run e2e"
-3. A cypres window opens. Click on "Run all specs" to run tests.
 
 If the above don't work:
 
