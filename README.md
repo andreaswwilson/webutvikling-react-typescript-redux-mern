@@ -19,7 +19,7 @@ Open two terminals
 1. In terminal 1:
    cd server -> npm install -> npm start
 2. In terminal 2:
-   cd client -> npm install -> npm star
+   cd client -> npm install -> npm start
 
 # How to run on gitpod
 
