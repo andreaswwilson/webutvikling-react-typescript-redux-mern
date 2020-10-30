@@ -75,7 +75,7 @@ export const MoviePage: React.FC = (): JSX.Element => {
               }
 
               if (formInput.length > 5 && movie) {
-                updateMovie(movie);
+                dispatch(updateMovie(movie));
               }
 
               setFormInput('');
