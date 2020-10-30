@@ -7,7 +7,7 @@ import { reducers } from './reducers';
 import { Provider } from 'react-redux';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { MoviePage } from './components/MoviePage';
-import { Navbar, NavbarBrand } from 'reactstrap';
+import { Navbar, NavbarBrand, NavbarText } from 'reactstrap';
 
 const store = createStore(reducers, applyMiddleware(thunk));
 
@@ -17,6 +17,7 @@ ReactDOM.render(
       <NavbarBrand className='text-white' href='/'>
         Home
       </NavbarBrand>
+      <NavbarText>Internet Movie Database</NavbarText>
     </Navbar>
     <Router>
       <Switch>
