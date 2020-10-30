@@ -1,6 +1,12 @@
 import React, { FC, FormEvent, useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
+
 import { Form, FormGroup, Input, Container, Row } from 'reactstrap';
+
+import { fetchMovies } from '../actions/movies'
+
+
+
 
 import { updateQuery } from '../actions/movies';
 
