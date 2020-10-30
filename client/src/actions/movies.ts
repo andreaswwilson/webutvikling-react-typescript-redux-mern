@@ -1,6 +1,8 @@
 import axios from 'axios';
 import { MoviesActionTypes } from '.';
 import { Dispatch } from 'redux';
+
+// Interace of one movie object
 export interface Movie {
   _id: string;
   Title: string;
@@ -31,6 +33,7 @@ export interface Movie {
   Reviews?: string[];
 }
 
+// Interface of the state used for managing movie state
 export interface MovieState {
   movies: Movie[];
   movie?: Movie;
@@ -58,9 +61,12 @@ export interface FetchMoviesProps {
 }
 
 export const fetchMovies = (props: FetchMoviesProps) => {
+  // Fetch all movies that mach with the current query
   const { genre, sortYear, title, limit, page } = props;
   let url = 'http://localhost:5000/api/movies?';
 
+  // Sice the FetchMoviesProps interface have a lot of optional
+  // keys we need to checko what keys are set
   if (genre) {
     genre.forEach((g) => {
       url += '&genre[]=' + g;
@@ -78,8 +84,8 @@ export const fetchMovies = (props: FetchMoviesProps) => {
   if (page) {
     url += '&page=' + page;
   }
-  console.log('FetchMovies url:', url);
 
+  // Get the data
   return async (dispatch: Dispatch) => {
     const response = await axios.get(url);
 
@@ -116,17 +122,6 @@ export const fetchSigleMovie = (props: FetchMoviesProps) => {
     };
   }
 };
-export interface DeleteMovieAction {
-  type: MoviesActionTypes.deleteMovie;
-  payload: string;
-}
-
-export const deleteMovie = (id: string): DeleteMovieAction => {
-  return {
-    type: MoviesActionTypes.deleteMovie,
-    payload: id,
-  };
-};
 
 export interface ToggleFavoriteMovieAction {
   type: MoviesActionTypes.toggleFavorite;
@@ -140,23 +135,12 @@ export const toggleFavoriteMovie = (id: string): ToggleFavoriteMovieAction => {
   };
 };
 
-export interface SortByYearMovieAction {
-  type: MoviesActionTypes.sortByYear;
-  payload: boolean;
-}
-
-export const sortByYear = (reversed: boolean): SortByYearMovieAction => {
-  return {
-    type: MoviesActionTypes.sortByYear,
-    payload: reversed,
-  };
-};
-
 export interface UpdateMovieAction {
   type: MoviesActionTypes.updateMovie;
   payload: any;
 }
-
+// Used for updating a single movie object in the database
+// Done by sending the entire movie object as we would like it as a put request
 export const updateMovie = (movie: Movie) => {
   const url = 'http://localhost:5000/api/movies/' + movie._id;
   console.log('URL:' + url);
@@ -169,6 +153,8 @@ export const updateMovie = (movie: Movie) => {
     });
   };
 };
+
+// Set the queries we whould like to add to th
 
 export interface UpdateQueryAction {
   type: MoviesActionTypes.updateQuery;

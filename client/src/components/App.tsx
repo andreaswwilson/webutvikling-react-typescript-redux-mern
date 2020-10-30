@@ -30,7 +30,7 @@ import './style.css';
 interface Props {
   movieState: MovieState;
   fetchMovies: Function;
-  updateMovie: any;
+  updateMovie: any; // Couldn figure out this type
   toggleFavoriteMovie: typeof toggleFavoriteMovie;
   updateQuery: typeof updateQuery;
 }

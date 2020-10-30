@@ -1,9 +1,7 @@
 import {
   FetchMoviesAction,
-  DeleteMovieAction,
   ToggleFavoriteMovieAction,
   UpdateMovieAction,
-  SortByYearMovieAction,
   UpdateQueryAction,
   FetchSingleMovieAction,
 } from './movies';
@@ -20,9 +18,7 @@ export enum MoviesActionTypes {
 
 export type MoviesAction =
   | FetchMoviesAction
-  | DeleteMovieAction
   | ToggleFavoriteMovieAction
   | UpdateMovieAction
-  | SortByYearMovieAction
   | UpdateQueryAction
   | FetchSingleMovieAction;
