@@ -125,7 +125,10 @@ have some pation. If you need to start the project again go to the root folder a
 
 Client is running on localhost:3000 and server is running on localhost:5000
 
-## If gitpod doesnt fix automatically
+Open the page by going to "open port" and select "open browser"
+![Open browser](Images/openbrower.png)
+
+## If gitpod doesnt start automatically
 
 Open two terminals
 
