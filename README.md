@@ -4,22 +4,16 @@
 
 # How to run locally
 
-From root folder run
-
 1. Connect to NTNU network
-2. npm install
-3. npm run installscript
-4. npm start
-
-Client is running on localhost:3001 and server is running on localhost:3000
-
-If that doesn't work
-Open two terminals
-
-1. In terminal 1:
+2. Open two terminals
+3. In terminal 1:
    cd server -> npm install -> npm start
-2. In terminal 2:
+4. In terminal 2:
    cd client -> npm install -> npm start
+
+Sometimes the server needs to be stopped (ctr+c) and run again (npm start)
+
+Client is running on localhost:300+ and server is running on localhost:5000
 
 # How to run on gitpod
 
