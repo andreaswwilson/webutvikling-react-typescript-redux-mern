@@ -13,18 +13,15 @@
 
 Sometimes the server needs to be stopped (ctr+c) and run again (npm start)
 
-Client is running on localhost:300+ and server is running on localhost:5000
+Client is running on localhost:3000 and server is running on localhost:5000
 
 # How to run on gitpod
 
 In gitpod everthing should set up automatically - but there are some issues with ports and access so it is better to clone and run locally. If you need to start the project again go to the root folder and run npm start
 
-Client is running on localhost:3001 and server is running on localhost:3000
+Client is running on localhost:3000 and server is running on localhost:5000
 
-Open the page by going to "open port" and select "open browser"
-![Open browser](Images/openbrower.png)
-
-## If gitpod doesn't start automatically
+## If gitpod doesn't work
 
 Clone and run locally.
 
