@@ -1,0 +1,19 @@
+{
+  "name": "project-3-it2810-group-32",
+  "version": "1.0.0",
+  "description": "# Overview",
+  "main": "index.js",
+  "scripts": {
+    "start": "concurrently \"cd server && npm start \" \"cd client && npm start \""
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://gitlab.stud.idi.ntnu.no/it2810-h20/team-32/project-3-it2810-group-32.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "concurrently": "^5.3.0"
+  }
+}
