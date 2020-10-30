@@ -17,7 +17,8 @@ The client is build on typescript, redux, bootstrap/reactstrap, react-router and
 
 State management is done by usage of both redux and react hooks.
 Redux is used for handeling the state of movies and pagination. For movies the states that are handled are an array
-of all movies we currently are showing the user.
+of all movies we currently are showing the user, one movie object for rendering a movie page, isLoading, the 
+current query based on an accumulation of serach, filter and sort and the total count of hits from the api for the current query.
 
 For states limited to local files we have used react hooks to simplifiy the program and to avoid
 passing states around that are not necassary to keep in a global store.
