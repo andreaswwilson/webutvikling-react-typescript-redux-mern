@@ -2,6 +2,9 @@
 
 # Project 3 - IT2810 Group 32
 
+# Kort om prosjektet
+Prosjektet er en moviedb laget på MERN og typescript. Redux brukt som state management.
+
 # How to run locally
 
 1. Connect to NTNU network (if you aren't there physically, use a VPN. Instructions: https://innsida.ntnu.no/wiki/-/wiki/English/Install+VPN)
